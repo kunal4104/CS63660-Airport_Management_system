@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Union List</title>
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<body>
+		<table>
+            <tr>
+                <th>Union Name</th>
+                <th>Strength</th>
+                <th>Availability</th>
+            </tr>
+            
+            while($row = mysqli_fetch_array(listunions())){ 
+                echo "<tr>";
+                echo "<td>".$row['union_name']."</td>";
+                <!-- wrote sql query to get union strength and availability, dont know if it works -->
+                echo "<td>".$row['strength']=mysqli_query("select count(*) from unions where union_name=$row['union_name'])."</td>";
+                <!-- assuming 100 is the max strength -->
+                echo "<td>".(100-$row['strength'])."</td>"; 
+        }
+        </table>
+	</body>
+</html>

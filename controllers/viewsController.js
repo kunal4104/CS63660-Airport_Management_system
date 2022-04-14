@@ -14,3 +14,9 @@ exports.unionPage = (req, res, next) => {
 exports.membersPage = (req, res, next) => {
 	res.status(200).render('viewAllMembers');
 }
+exports.unionListPage = (req, res, next) => {
+	res.status(200).render('unionList');
+}
+exports.addUnionPage = (req, res, next) => {
+	res.status(200).render('addUnion');
+}
