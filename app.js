@@ -69,7 +69,6 @@ app.use((req, res, next) => {
 });
 
 //Routes
-
 app.use('/', viewRoutes);
 app.use('/api/v1/user', loginRouter);
 

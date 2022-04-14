@@ -4,6 +4,10 @@ const viewsController = require('../controllers/viewsController');
 const router = express.Router();
 
 router.get('/', viewsController.loginPage);
-router.get('/index', viewsController.indexPage);
 
+//router.get('/index', viewsController.unionPage);
+router.get('/index', viewsController.indexPage);
+//console.log('router.get(/index');
+router.get('/union', viewsController.unionPage);
+router.get('/member', viewsController.membersPage);
 module.exports = router;
