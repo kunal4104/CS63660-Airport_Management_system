@@ -25,9 +25,9 @@ exports.login = async (req, res, next) => {
 
 	//get by specific attribute value
 	const rows = await factory.getByAttribute(
-		'user_login',
-		'user_id',
-		'abhishek.1'
+		'users',
+		'id',
+		1
 	);
 
 	console.log(rows);
@@ -53,3 +53,63 @@ exports.forgotPassword = (req, res, next) => {
 exports.updatePassword = (req, res, next) => {
 	next();
 };
+
+exports.userProfile = async (req, res, next) => {
+	const rows = await factory.getByAttribute(
+		'employees',
+		'SSN',
+		'1122334455'
+	);
+
+	const techRows = await factory.getByAttribute(
+		'technician',
+		'SSN',
+		'1122334455'
+	);
+
+	const atcRows = await factory.getByAttribute(
+		'ATC_employees',
+		'SSN',
+		'1122334455'
+	);
+
+	
+	// if techRows.length() == 0 {
+
+	// }  
+	// console.log(techRows);
+	// console.log(atcRows);
+
+	if (techRows.length == 0) {
+		rows[0].last_testDate = atcRows[0].last_testDate;
+	}
+
+	if (atcRows.length == 0) {
+		rows[0].expertise = techRows[0].expertise;
+	}
+	// console.log(rows);
+	res.status(200).json({
+		status: 'success',
+		token: 'token',
+		data: rows,
+	});
+};
+
+exports.saveProfile = async (req, res, next) => {
+	const message = await factory.setEmployeeInfo(
+		'employees',
+		req.body,
+		'SSN',
+	);
+
+
+	console.log(message)
+	// console.log(rows);
+	res.status(200).json({
+		status: 'success',
+		token: 'token',
+		data: {info: message.info},
+	});
+};
+
+

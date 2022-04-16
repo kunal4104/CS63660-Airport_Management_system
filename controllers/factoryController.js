@@ -33,3 +33,12 @@ exports.getByCustomQuery = async (query) => {
 	const [rows, fields] = await promisePool.query(query);
 	return rows;
 };
+
+exports.setEmployeeInfo = async (table, data, key) => {
+	let query = `UPDATE ${table} SET name = "${data.name}", address="${data.address}", phone_num=${data.phone_num}, union_id=${data.union_id} WHERE ${key} = "${data.SSN}"`
+	console.log(query);
+	const [ret,fields] = await promisePool.query(
+		query
+	);
+	return ret;
+};

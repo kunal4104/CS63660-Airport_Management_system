@@ -12,4 +12,7 @@ router.patch('/resetPassword/:token', loginPageController.resetPassword);
 
 router.patch('/updatePassword', loginPageController.updatePassword);
 
+router.get('/userProfile', loginPageController.userProfile);
+router.post('/saveProfile', loginPageController.saveProfile);
+
 module.exports = router;

@@ -14,3 +14,7 @@ exports.unionPage = (req, res, next) => {
 exports.membersPage = (req, res, next) => {
 	res.status(200).render('viewAllMembers');
 }
+
+exports.profilePage = (req, res, next) => {
+	res.status(200).render('profileSettings');
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Profile Settings</title>
+		<link rel="stylesheet" href="/css/style.css" />
+        <script src="js/profileSettings.js"></script>
+	</head>
+	<body>
+        <h1>Profile Settings</h1>
+		<form>
+            <label for="uname">Name:</label>
+            <input type="text" id="uname" name="uname"><br><br>
+
+            <label for="SSN">SSN:</label>
+            <input type="text" id="uSSN" disabled><br><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="uaddress" name="address"><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="uphone" name="phone"><br><br>
+
+            <label for="salary">Salary:</label>
+            <input type="text" id="usalary" name="salary" disabled><br><br>
+
+            <label id="expertiseLable" for="expertise">Expertise:</label>
+            <input type="text" id="uExpertise" name="expertise" disabled><br><br>
+
+            <label id="uUtdLable" for="utd">Update Test Date:</label>
+            <input type="text" id="uUtd" name="utd" disabled><br><br>
+
+            <label for="salary">Union Id:</label>
+            <input type="text" id="uUnion" name="unionId" disabled>
+            <button class="userUnionButton" id="btnUnionJoin" type="button">Join</button>
+            <button class="userUnionButton" id="btnUnionLeave" type="button">Leave</button><br><br>
+
+            <button type="button" id="saveProfileSettings" >Save</button>
+            <button type="button" id="cancelProfileSettings" >Cancel</button>
+            
+          </form>
+
+          <div id="uSuccessDialog" class="alert success hideInfo">
+            <span class="closebtn">&times;</span>  
+            <strong>Success!</strong> Updated user info.
+          </div>
+          
+          <div id="uErrorDialog" class="alert hideInfo">
+            <span class="closebtn">&times;</span>  
+            <strong>Error!</strong> Update Unsuccessful.
+          </div>
+          
+          
+	</body>
+</html>
