@@ -12,6 +12,12 @@ const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+//routes defined
+const loginRouter = require('./routes/loginRoutes');
+const viewRoutes = require('./routes/viewRoutes');
+
+const { application } = require('express');
+
 // Start express app
 const app = express();
 
@@ -22,9 +28,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
-app.use(cors());
+// app.use(cors());
 
-app.options('*', cors());
+// app.options('*', cors());
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,9 +68,9 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get('/', function (req, res) {
-	res.render('index');
-});
+//Routes
+app.use('/', viewRoutes);
+app.use('/api/v1/user', loginRouter);
 
 app.all('*', (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
