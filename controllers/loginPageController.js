@@ -57,20 +57,17 @@ exports.updatePassword = (req, res, next) => {
 exports.userProfile = async (req, res, next) => {
 	const rows = await factory.getByAttribute(
 		'employees',
-		'SSN',
-		'1122334455'
+		{'SSN':'1122334455'}
 	);
 
 	const techRows = await factory.getByAttribute(
 		'technician',
-		'SSN',
-		'1122334455'
+		{'SSN':'1122334455'}
 	);
 
 	const atcRows = await factory.getByAttribute(
 		'ATC_employees',
-		'SSN',
-		'1122334455'
+		{'SSN':'1122334455'}
 	);
 
 	
@@ -96,10 +93,11 @@ exports.userProfile = async (req, res, next) => {
 };
 
 exports.saveProfile = async (req, res, next) => {
-	const message = await factory.setEmployeeInfo(
+	const data = req.body;
+	const message = await factory.updateTable(
 		'employees',
-		req.body,
-		'SSN',
+		{ 'name' : data.name, 'SSN' : data.SSN, 'address' : data.address, 'phone_num' : data.phone_num, 'salary' : data.salary, 'union_id' : data.union_id},
+		{'SSN': data.SSN},
 	);
 
 

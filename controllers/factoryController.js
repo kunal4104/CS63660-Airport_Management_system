@@ -21,11 +21,17 @@ exports.getAll = async (table) => {
 	return rows;
 };
 
-exports.getByAttribute = async (table, attribute, value) => {
-	console.log(table, attribute, value);
-	const [rows, fields] = await promisePool.query(
-		`SELECT * FROM ${table} WHERE ${attribute} = "${value}"`
-	);
+exports.getByAttribute = async (table, attributes = {}) => {
+	let selectQuery = `SELECT * FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
 	return rows;
 };
 
@@ -34,8 +40,18 @@ exports.getByCustomQuery = async (query) => {
 	return rows;
 };
 
-exports.setEmployeeInfo = async (table, data, key) => {
-	let query = `UPDATE ${table} SET name = "${data.name}", address="${data.address}", phone_num=${data.phone_num}, union_id=${data.union_id} WHERE ${key} = "${data.SSN}"`
+exports.updateTable = async (table, attributes = {}, data = {}) => {
+	let query = `UPDATE ${table} SET`;
+	for(var key in attributes) {
+		query += ` ${key} = "${attributes[key]}",`;
+	}
+
+	query = query.slice(0, -1);
+	query += " WHERE TRUE";
+	for(var key in data) {
+		query += ` AND ${key} = "${data[key]}"`;
+	}
+	
 	console.log(query);
 	const [ret,fields] = await promisePool.query(
 		query
