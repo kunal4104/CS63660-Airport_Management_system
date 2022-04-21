@@ -1,36 +1,38 @@
 
 
 window.addEventListener('load', function () {
-	// function login() {
-	// 	console.log('login');
-	// 	var xhr = new XMLHttpRequest();
-	// 	xhr.open('post', '/api/v1/user/login', true);
-	// 	xhr.onload = function () {
-	// 		if (xhr.status === 200) {
-	// 			var rtrn = JSON.parse(xhr.responseText);
-	// 			if (rtrn.status == 'success') {
-	// 				window.location.href = '/index';
-	// 			}
-	// 		}
-	// 	};
-	// 	xhr.send();
-	// }
-	// const tryLogin = document.getElementById('Login');
-	// console.log(tryLogin);
-	// tryLogin.addEventListener('click', login);
-    // document.getElementById("ProfileButton").addEventListener("click", getUserProfile);
-
-    function getUserProfile() {
-        var xhr = new XMLHttpRequest();
-		xhr.open('post', '/profile', true);
+	function getAssignedJobs() {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'api/v1/user/assignedJobs', true);
+		xhr.send();
 		xhr.onload = function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-					window.location.href = '/profile';
+					console.log(rtrn.data);
+					populate(rtrn.data);
 				}
 			}
 		};
-		xhr.send();
-    }
+		
+	}
+
+	getAssignedJobs();
+
+	function populate(assignedJobs) {
+		var table = document.getElementById("assignedJobsTable");
+		assignedJobs.forEach((job) => {
+			var row = table.insertRow();
+			var cell1 = row.insertCell();
+			cell1.innerHTML = job.job_id;
+			var cell2 = row.insertCell();
+			cell2.innerHTML = job.flight_num; 
+			var cell3 = row.insertCell();
+			cell3.innerHTML = job.date_assigned; 
+			var cell4 = row.insertCell();
+			cell4.innerHTML = job.test_id; 
+			var cell5 = row.insertCell();
+			cell5.innerHTML = job.status; 
+		});
+	}
 });

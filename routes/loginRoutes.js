@@ -1,5 +1,6 @@
 const express = require('express');
 const loginPageController = require('../controllers/loginPageController');
+const jobController = require('../controllers/jobController');
 
 const router = express.Router();
 
@@ -14,5 +15,7 @@ router.patch('/updatePassword', loginPageController.updatePassword);
 
 router.get('/userProfile', loginPageController.userProfile);
 router.post('/saveProfile', loginPageController.saveProfile);
+
+router.get('/assignedJobs', jobController.getAssignedJobs);
 
 module.exports = router;
