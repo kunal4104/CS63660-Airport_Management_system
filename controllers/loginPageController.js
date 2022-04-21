@@ -24,19 +24,26 @@ exports.login = async (req, res, next) => {
 	// const rows = await factory.getByCustomQuery('SELECT * FROM `user_login`');
 
 	//get by specific attribute value
-	const rows = await factory.getByAttribute(
-		'users',
-		'id',
-		1
-	);
+	try {
+		const rows = await factory.getByAttribute(
+			'user_login',
+			{'user_id':1}
+		);
+	
+		console.log(rows);
+	
+		res.status(200).json({
+			status: 'success',
+			token: 'token',
+			data: rows,
+		});
+	} catch(error){
+		res.status(500).json({
+			status: 'error',
+			data: error,
+		});
+	}
 
-	console.log(rows);
-
-	res.status(200).json({
-		status: 'success',
-		token: 'token',
-		data: rows,
-	});
 };
 
 exports.logout = (req, res, next) => {

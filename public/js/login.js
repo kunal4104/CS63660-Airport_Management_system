@@ -4,6 +4,7 @@ window.addEventListener('load', function () {
 		var xhr = new XMLHttpRequest();
 		xhr.open('post', '/api/v1/user/login', true);
 		xhr.onload = function () {
+			console.log(JSON.parse(xhr.responseText))
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
