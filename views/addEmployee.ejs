@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>index</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="js/addEmployee.js"></script>
+	</head>
+	<body>
+		<div class="headerDiv">
+            <a href="/admin"><img class="avatar" src="/images/back_button.png"></a>
+			<h1>ADMIN HOME PAGE <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
+			
+		</div>
+
+		<div class="topnav">
+			<a href="/admin">View Aircrafts</a>
+			<a class="active" href="/addEmployee">Add Employee</a>
+			<a href="#">Add Aircrafts</a>
+			<a href="#">Add Union</a>
+            <a href="#">Schedule Check</a>
+		</div>
+		<div>
+            <form>
+                <label for="eName">Name:</label>
+                <input type="text" id="eName" name="eName"><br><br>
+    
+                <label for="eSSN">SSN:</label>
+                <input type="text" id="eSSN" ><br><br>
+
+                <label for="eType">Type:</label>
+                <select id="eType" name="eType">
+                    <option value="technician">Technician</option>
+                    <option value="ATC">ATC Employee</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <br><br>
+    
+                <label id="addExpertiseLable" for="addExpertise">Expertise:</label>
+                <input  type="text" id="addExpertise" name="addExpertise"><br><br>
+
+                <label class="hideInfo" id="eUtdLable" for="eutd">Test Date:</label>
+                <input class="hideInfo" type="text" id="eUtd" name="eutd" ><br><br>
+
+                <label for="eaddress">Address:</label>
+                <input type="text" id="eaddress" name="eaddress"><br><br>
+    
+                <label for="ephone">Phone Number:</label>
+                <input type="text" id="ephone" name="ephone"><br><br>
+    
+                <label for="esalary">Salary:</label>
+                <input type="text" id="esalary" name="esalary"><br><br>
+
+                <label for="euserid">USER ID:</label>
+                <input type="text" id="euserid" name="euserid"><br><br>
+    
+                <label for="epword">Password:</label>
+                <input type="text" id="epword" name="epword"><br><br>
+    
+                
+    
+                <button type="button" id="btnaddEmplpyee" >Save</button>
+                <button type="button" id="btncancelAddEmployee" >Cancel</button>
+                
+              </form>
+
+              <div id="addEmployeeSuccess" class="alert success hideInfo">
+                <span class="closebtn">&times;</span>  
+                <strong>Success!</strong> Employee Added successfully.
+              </div>
+              
+              <div id="addEmployeeError" class="alert hideInfo">
+                <span class="closebtn">&times;</span>  
+                <strong>Error!</strong> Unable to add Employee.
+              </div>
+		</div>
+	</body>
+</html>

@@ -6,6 +6,10 @@ exports.indexPage = (req, res, next) => {
 	res.status(200).render('index');
 };
 
+exports.adminPage = (req, res, next) => {
+	res.status(200).render('admin');
+};
+
 exports.unionPage = (req, res, next) => {
 	console.log('unionPage');
 	res.status(200).render('unionDetails');
@@ -18,3 +22,7 @@ exports.membersPage = (req, res, next) => {
 exports.profilePage = (req, res, next) => {
 	res.status(200).render('profileSettings');
 }
+
+exports.addEmployeePage = (req, res, next) => {
+	res.status(200).render('addEmployee');
+};

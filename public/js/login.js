@@ -8,7 +8,12 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-					window.location.href = '/index';
+					if (rtrn.data[0].type === "admin") {
+						window.location.href = '/admin';
+					}else {
+						window.location.href = '/index';
+					}
+					
 				}
 			}
 		};
