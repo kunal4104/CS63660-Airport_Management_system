@@ -17,5 +17,6 @@ router.get('/userProfile', loginPageController.userProfile);
 router.post('/saveProfile', loginPageController.saveProfile);
 
 router.get('/assignedJobs', jobController.getAssignedJobs);
+router.get('/pastJobs', jobController.getPastJobs);
 
 module.exports = router;

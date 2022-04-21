@@ -11,4 +11,5 @@ router.get('/index', viewsController.indexPage);
 router.get('/union', viewsController.unionPage);
 router.get('/member', viewsController.membersPage);
 router.get('/profile', viewsController.profilePage);
+router.get('/pastJobs', viewsController.pastJobs);
 module.exports = router;
