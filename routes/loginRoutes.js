@@ -20,13 +20,10 @@ router.get('/userProfile', loginPageController.userProfile);
 router.post('/saveProfile', loginPageController.saveProfile);
 router.post('/updatePassword', loginPageController.updatePassword);
 router.get('/assignedJobs', jobController.getAssignedJobs);
-<<<<<<< HEAD
 router.post('/assignedJobs', jobController.postAssignedJobs);
 
-=======
 router.post('/updateUnion', loginPageController.updateUnion);
 router.get('/union/:id', unionTableController.getUnionDetails);
->>>>>>> 46b8779d373e82b8a33af36590c1945fac4e6a7d
 router.get('/pastJobs', jobController.getPastJobs);
 router.get('/allunions', unionTableController.getAllUnionDetails);
 module.exports = router;

@@ -41,11 +41,9 @@ exports.addAircraftsModelPage = (req, res, next) => {
 exports.addFaaTest = (req, res, next) => {
 	res.status(200).render('addFaaTest');
 };
-<<<<<<< HEAD
 exports.addJobReport = (req, res, next) => {
 	res.status(200).render('addJobReport');
 }
-=======
 exports.addUnion = (req, res, next) => {
 	res.status(200).render('addUnion');
 };
@@ -54,4 +52,3 @@ exports.updatePassword = (req, res, next) => {
 }
 
 
->>>>>>> 46b8779d373e82b8a33af36590c1945fac4e6a7d
