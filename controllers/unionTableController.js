@@ -14,3 +14,23 @@ exports.getUnionDetails = async (req, res, next) => {
 		data: rows,
 	});
 };
+
+exports.getAllUnionDetails = async(req, res, next) => {
+	const message_getAllUnionDetails = await factory.getAll(
+		'unions'
+	);
+
+    if (!message_getAllUnionDetails.err) {
+        res.status(200).json({
+            status: 'success',
+            token: 'token',
+            data: message_getAllUnionDetails,
+        });
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message_getAllUnionDetails.info},
+        });
+    }
+};
