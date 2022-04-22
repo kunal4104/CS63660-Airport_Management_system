@@ -178,28 +178,28 @@ exports.addFaaTest = async (req, res, next) => {
 		});
 	}
 };
-exports.addNewUnion = async(req, res, next) => {
+exports.addNewUnion = async (req, res, next) => {
 	const data = req.body;
 
-    const message_add_aircraft_model = await factory.insertIntoTable(
+	const message_add_aircraft_model = await factory.insertIntoTable(
 		'unions',
 		['union_id', 'name', 'founder_name', 'founded_date'],
-        [data.union_id, data.name, data.founder_name, data.founded_date]
+		[data.union_id, data.name, data.founder_name, data.founded_date]
 	);
-    
-    if(!message_add_aircraft_model.err) {
-        res.status(200).json({
-            status: 'success',
-            token: 'token',
-            data: {info: message_add_aircraft_model.info},
-        });
-    }else {
-        res.status(409).json({
-            status: 'Failure',
-            token: 'token',
-            data: {info: message_add_aircraft_model.info},
-        });
-    }
+
+	if (!message_add_aircraft_model.err) {
+		res.status(200).json({
+			status: 'success',
+			token: 'token',
+			data: { info: message_add_aircraft_model.info },
+		});
+	} else {
+		res.status(409).json({
+			status: 'Failure',
+			token: 'token',
+			data: { info: message_add_aircraft_model.info },
+		});
+	}
 };
 
 exports.getTechnician = async (req, res, next) => {
@@ -225,4 +225,39 @@ exports.getTechnician = async (req, res, next) => {
 			data: { info: employee.info },
 		});
 	}
+};
+
+exports.assignTask = async (req, res, next) => {
+	const data = req.body;
+
+	var dateObj = new Date();
+	var month = dateObj.getUTCMonth() + 1; //months from 1-12
+	var day = dateObj.getUTCDate();
+	var year = dateObj.getUTCFullYear();
+	var date = year + '-' + month + '-' + day;
+
+	const assign = await factory.insertIntoTable(
+		'jobs',
+		['flight_num', 'technician_id', 'test_id', 'date_assigned', 'status'],
+		[data.flight_num, data.technician_id, data.test_id, date, 0]
+	);
+	console.log(data);
+	return res.status(200).json({
+		status: 'success',
+		data: data,
+	});
+
+	// if (!assign.err) {
+	// 	res.status(200).json({
+	// 		status: 'success',
+	// 		token: 'token',
+	// 		data: { info: assign.info },
+	// 	});
+	// } else {
+	// 	res.status(409).json({
+	// 		status: 'Failure',
+	// 		token: 'token',
+	// 		data: { info: assign.info },
+	// 	});
+	// }
 };
