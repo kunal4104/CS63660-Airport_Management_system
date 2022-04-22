@@ -2,6 +2,10 @@
 
 In order to run the project
 
-run command npm install
+run command to install the dependencies 
+$npm install
 
-then npm run start, it will be open on localhost:3000/
+then to start the project
+$npm run start
+
+it will be open on localhost:3000/
