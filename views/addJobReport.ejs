@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>index</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="js/addJobReport.js"></script>
+	</head>
+	<body>
+		<div class="headerDiv">
+			<h1>HOME PAGE <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
+			
+		</div>
+
+		<div class="topnav">
+			<a href="/index">View Assigned Jobs</a>
+			<a class="active" href="/addJobReport">Add Report</a>
+			<a href="/pastJobs">View Past Jobs</a>
+			<a href="#">Find Union</a>
+		</div>
+		<div>
+            <form>
+                <br><br>
+                <label for="JobId">Job ID:</label>
+                <select id="selectJob">
+                  <option disabled selected value> --select-- </option>
+                </select><br><br>
+                <div id="div1" style="display: none">
+                  <label>Flight Number:</label>
+                  <span id="flightNo"></span> 
+                  <br><br>
+                </div>
+                <div id="div2" style="display: none">
+                  <label>Test Name:</label>
+                  <span id="testName"></span> 
+                  <br><br>
+                </div>
+                <label for="finishDate">Date Finished:</label>
+                <input type="date" id="ufDate" ><br><br>
+    
+                <label for="score">Score:</label>
+                <input type="text" id="uscore"><br><br>
+    
+                <label for="hrSpent">Hours Spent:</label>
+                <input type="text" id="uhr"><br><br>
+    
+                <button type="button" id="submitReport" >Submit</button>             
+              </form>
+		</div>
+	</body>
+</html>
