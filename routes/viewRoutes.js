@@ -25,4 +25,6 @@ router.get('/profile', viewsController.profilePage);
 router.get('/addEmployee', viewsController.addEmployeePage);
 router.get('/addAircrafts', viewsController.addAircraftsPage);
 router.get('/pastJobs', viewsController.pastJobs);
+router.get('/addAircraftModels', viewsController.addAircraftsModelPage);
+
 module.exports = router;
