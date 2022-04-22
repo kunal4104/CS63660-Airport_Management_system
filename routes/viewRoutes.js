@@ -27,4 +27,5 @@ router.get('/addAircrafts', viewsController.addAircraftsPage);
 router.get('/pastJobs', viewsController.pastJobs);
 router.get('/addAircraftModels', viewsController.addAircraftsModelPage);
 router.get('/addFaaTest', viewsController.addFaaTest);
+router.get('/addJobReport', viewsController.addJobReport);
 module.exports = router;
