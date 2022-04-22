@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>index</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="js/addUnion.js"></script>
+	</head>
+	<body>
+		<div class="headerDiv">
+            <a href="/admin"><img class="avatar" src="/images/back_button.png"></a>
+			<h1>ADD UNIONS <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
+			
+		</div>
+
+		<div class="topnav">
+			<a href="/admin">DashBoard</a>
+			<a href="/addEmployee">Add Employee</a>
+			<a href="/addAircrafts">Add Aircrafts</a>
+            <a href="/addAircraftModels">Add Aircraft Model</a>
+			<a href="/addFaaTest">Add FAA Tests</a>
+			<a class="active" href="/addUnion">Add Union</a>
+            <a href="#">Schedule Check</a>
+		</div>
+		<div>
+            <form>
+                <label for="uName">Name:</label>
+                <input  type="text" id="uName" name="uName"><br><br>
+
+                <label for="uUid">Union ID:</label>
+                <input type="text" id="uUid" name="uUid"><br><br>
+    
+                
+                <label for="uFname">Founder's Name:</label>
+                <input type="text" id="uFname" name="uFname"><br><br>
+
+                <label for="uDateF">Date Founded:</label>
+                <input type="date" id="uDateF" name="uDateF"><br><br>
+                
+    
+                <button type="button" id="btnaddUnion" >Save</button>
+                <button type="button" id="btncancelAddUnion" >Cancel</button>
+                
+              </form>
+
+              <div id="addUnionSuccess" class="alert success hideInfo">
+                <span class="closebtn">&times;</span>  
+                <strong>Success!</strong> UnionAdded successfully.
+              </div>
+              
+              <div id="addUnionError" class="alert hideInfo">
+                <span class="closebtn">&times;</span>  
+                <strong>Error!</strong> Unable to add Union.
+              </div>
+		</div>
+	</body>
+</html>
