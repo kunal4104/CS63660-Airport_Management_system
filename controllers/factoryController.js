@@ -13,12 +13,17 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 exports.getAll = async (table) => {
-	const [rows, fields] = await promisePool.query(`SELECT * FROM ${table}`);
-	// res.status(200).json({
-	// 	status: 'success',
-	// 	data: rows,
-	// });
-	return rows;
+	try {
+		const [rows, fields] = await promisePool.query(`SELECT * FROM ${table}`);
+		// res.status(200).json({
+		// 	status: 'success',
+		// 	data: rows,
+		// });
+		return rows;
+	}catch (err) {
+		return {err: "Error", data: err};
+	}
+	
 };
 
 exports.getByAttribute = async (table, attributes = {}) => {
@@ -106,4 +111,44 @@ exports.updateTableForUnion = async (table, attributes = {}, data = {}) => {
 	console.log(query);
 	const [ret, fields] = await promisePool.query(query);
 	return ret;
+};
+
+exports.insertIntoTable = async (table, attributes = [], data = []) => {
+	let query = `INSERT INTO ${table} (`;
+	for(var key in attributes) {
+		query += ` ${attributes[key]},`;
+	}
+	query = query.slice(0, -1)
+	query += ') VALUES ('
+
+	for(var key in data) {
+		query += `"${data[key]}",`;
+	}
+	query = query.slice(0, -1)
+	query += ')'
+	
+	console.log(query);
+	try {
+		const [ret,fields] = await promisePool.query( query);
+		return ret
+	}catch (err){
+		console.log(err)
+		return {err: "Error", data: err};
+	}
+	
+	// console.log(fields)
+	// return ret;
+};
+
+
+exports.deleteFromTable = async (table, attributes, value) => {
+	let query = `DELETE FROM ${table} WHERE ${attributes} = "${value}"`;
+	
+	console.log(query);
+	try {
+		const [ret,fields] = await promisePool.query( query);
+		return ret
+	}catch (err){
+		return {err: "Error", data: err};
+	}
 };

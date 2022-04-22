@@ -24,4 +24,6 @@ router.post('/saveProfile', loginPageController.saveProfile);
 router.get('/assignedJobs', jobController.getAssignedJobs);
 router.post('/updateUnion', loginPageController.updateUnion);
 router.get('/union/:id', unionTableController.getUnionDetails);
+router.get('/pastJobs', jobController.getPastJobs);
+
 module.exports = router;
