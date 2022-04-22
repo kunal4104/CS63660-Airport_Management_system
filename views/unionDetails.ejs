@@ -3,19 +3,59 @@
 	<head>
 		<title>Union Details</title>
 		<link rel="stylesheet" href="/css/style.css" />
+        <script src="js/unionDetails.js"></script>
+        <script src="js/unionDetailsController.js"></script>
+        <script src="js/logout.js"></script>
 	</head>
 	<body>
-        <h1>UNION</h1>
+        <div class="headerDiv">
+			<h1>UNION <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
+			
+		</div>
+        <div class="topnav">
+			<a href="/index">View Assigned Jobs</a>
+			<a href="#">Add Report</a>
+			<a href="/pastJobs">View Past Jobs</a>
+			<a class = "active" href="/union">Find Union</a>
+            <a id="logout" href="#">Logout</a>
+		</div>
 		<form>
-            <label for="uname">Union name:</label>
-            <input type="text" id="uname" name="uname"><br><br>
+            <br><br>
+            <label for="uname">Union Name (required): </label>
+            <select id="uname" name="uname" required>
+                <option value="Blank"></option>
+            </select><br><br>
+            <label for="id">Union ID:</label>
+            <input type="text" id="union_id" name="uid" disabled><br><br>
+
             <label for="startDate">Started On:</label>
-            <input type="text" id="startDate" name="startDate"><br><br>
+            <input type="text" id="startDate" name="startDate" disabled><br><br>
+
             <label for="Lname">Leader Name:</label>
-            <input type="text" id="lname" name="lname"><br><br>
-            <button type="button" onclick="viewallmembers()" >View All Members</button>
-            <button type="button" onclick="join()" >Join</button>
-            <button type="button" onclick="leave()" >Leave</button>
-          </form>
+            <input type="text" id="lname" name="lname" disabled><br><br>
+
+            <button type="button" id="get_union_members">View All Members</button>
+            <button type="button" id="btnUnionJoin">Join</button>
+            <button type="button" id="btnUnionLeave">Leave</button>
+    </form>
+        <div id="union_members_table" style="display:none">
+            <table id="unionMembersTable">
+            <tr>
+                <th>Member Name</th>
+                <th>Membership ID</th>
+            </tr>
+          </table>
+        </div>
+
+    <div id="updateUnionSuccess" class="alert success hideInfo">
+        <span class="closebtn">&times;</span>  
+        <strong>Success!</strong> Union updated successfully.
+      </div>
+      
+      <div id="updateUnionError" class="alert hideInfo">
+        <span class="closebtn">&times;</span>  
+        <strong>Error!</strong> Unable to update union.
+      </div>
+
 	</body>
 </html>
