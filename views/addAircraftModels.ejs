@@ -4,10 +4,11 @@
 		<title>index</title>
 		<link rel="stylesheet" href="/css/style.css" />
 		<script src="js/addAircraftsModelsPage.js"></script>
-    <script src="js/logout.js"></script>
+		<script src="js/logout.js"></script>
 	</head>
 	<body>
-		<div class="headerDiv">
+		<%- include('adminNav.ejs') %>
+		<!-- <div class="headerDiv">
             <a href="/admin"><img class="avatar" src="/images/back_button.png"></a>
 			<h1>ADD AIRCRAFT MODELS <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
 			
@@ -23,36 +24,37 @@
       <a href="#">Schedule Check</a>
       <a id="logout" href="#">Logout</a>
 		</div>
+			<a href="#">Add Union</a>
+            <a href="#">Schedule Check</a>
+		</div> -->
+
 		<div>
-            <form>
-                <label for="amName">Name:</label>
-                <input  type="text" id="amName" name="amName"><br><br>
+			<form>
+				<label for="amName">Name:</label>
+				<input type="text" id="amName" name="amName" /><br /><br />
 
-                <label for="amModelNum">Model Number:</label>
-                <input type="text" id="amModelNum" name="amModelNum"><br><br>
-    
-                
-                <label for="amCapacity">Capacity:</label>
-                <input type="text" id="amCapacity" name="amCapacity"><br><br>
+				<label for="amModelNum">Model Number:</label>
+				<input type="text" id="amModelNum" name="amModelNum" /><br /><br />
 
-                <label for="amWeight">Weight:</label>
-                <input type="text" id="amWeight" name="amWeight"><br><br>
-                
-    
-                <button type="button" id="btnaddAircraftModel" >Save</button>
-                <button type="button" id="btncancelAddAircraftModel" >Cancel</button>
-                
-              </form>
+				<label for="amCapacity">Capacity:</label>
+				<input type="text" id="amCapacity" name="amCapacity" /><br /><br />
 
-              <div id="addAircrafModeltSuccess" class="alert success hideInfo">
-                <span class="closebtn">&times;</span>  
-                <strong>Success!</strong> Aircraft Model Added successfully.
-              </div>
-              
-              <div id="addAircraftModelError" class="alert hideInfo">
-                <span class="closebtn">&times;</span>  
-                <strong>Error!</strong> Unable to add Aircraft Model.
-              </div>
+				<label for="amWeight">Weight:</label>
+				<input type="text" id="amWeight" name="amWeight" /><br /><br />
+
+				<button type="button" id="btnaddAircraftModel">Save</button>
+				<button type="button" id="btncancelAddAircraftModel">Cancel</button>
+			</form>
+
+			<div id="addAircrafModeltSuccess" class="alert success hideInfo">
+				<span class="closebtn">&times;</span>
+				<strong>Success!</strong> Aircraft Model Added successfully.
+			</div>
+
+			<div id="addAircraftModelError" class="alert hideInfo">
+				<span class="closebtn">&times;</span>
+				<strong>Error!</strong> Unable to add Aircraft Model.
+			</div>
 		</div>
 	</body>
 </html>

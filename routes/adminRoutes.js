@@ -11,5 +11,6 @@ router.post('/addAircraftsModels', adminPageController.addAircraftModels);
 router.post('/addFaaTest', adminPageController.addFaaTest);
 router.post('/addNewUnion', adminPageController.addNewUnion);
 
+router.get('/technician', adminPageController.getTechnician);
 
 module.exports = router;

@@ -7,7 +7,8 @@
 		<script src="js/logout.js"></script>
 	</head>
 	<body>
-		<div class="headerDiv">
+		<%- include('adminNav.ejs') %>
+		<!-- <div class="headerDiv">
 			<h1>ADMIN HOME PAGE <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
 			
 		</div>
@@ -22,14 +23,15 @@
             <a href="#">Schedule Check</a>
 			<a id="logout" href="#">Logout</a>
 		</div>
+		</div> -->
 		<div>
 			<table id="assignedJobsTable">
 				<tr>
-				  <th>JobId</th>
-				  <th>Flight Number</th>
-				  <th>Date Assigned</th>
-				  <th>Test Name</th>
-				  <th>Status</th>
+					<th>JobId</th>
+					<th>Flight Number</th>
+					<th>Date Assigned</th>
+					<th>Test Name</th>
+					<th>Status</th>
 				</tr>
 			</table>
 		</div>

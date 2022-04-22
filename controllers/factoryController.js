@@ -20,10 +20,9 @@ exports.getAll = async (table) => {
 		// 	data: rows,
 		// });
 		return rows;
-	}catch (err) {
-		return {err: "Error", data: err};
+	} catch (err) {
+		return { err: 'Error', data: err };
 	}
-	
 };
 
 exports.getByAttribute = async (table, attributes = {}) => {
@@ -33,6 +32,18 @@ exports.getByAttribute = async (table, attributes = {}) => {
 		for (var key in attributes) {
 			selectQuery += ` AND ${key} = "${attributes[key]}"`;
 		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
+};
+
+exports.getByCondition = async (table, condition) => {
+	let selectQuery = `SELECT * FROM ${table}`;
+	selectQuery += ' WHERE TRUE';
+	for (var i = 0; i < condition.length; i++) {
+		selectQuery += ` AND ${condition[i][0]} ${condition[i][1]} ${condition[i][2]}`;
 	}
 
 	console.log(selectQuery);
@@ -112,40 +123,39 @@ exports.getPassword = async (table, attributes = {}) => {
 
 exports.insertIntoTable = async (table, attributes = [], data = []) => {
 	let query = `INSERT INTO ${table} (`;
-	for(var key in attributes) {
+	for (var key in attributes) {
 		query += ` ${attributes[key]},`;
 	}
-	query = query.slice(0, -1)
-	query += ') VALUES ('
+	query = query.slice(0, -1);
+	query += ') VALUES (';
 
-	for(var key in data) {
+	for (var key in data) {
 		query += `"${data[key]}",`;
 	}
-	query = query.slice(0, -1)
-	query += ')'
-	
+	query = query.slice(0, -1);
+	query += ')';
+
 	console.log(query);
 	try {
-		const [ret,fields] = await promisePool.query( query);
-		return ret
-	}catch (err){
-		console.log(err)
-		return {err: "Error", data: err};
+		const [ret, fields] = await promisePool.query(query);
+		return ret;
+	} catch (err) {
+		console.log(err);
+		return { err: 'Error', data: err };
 	}
-	
+
 	// console.log(fields)
 	// return ret;
 };
 
-
 exports.deleteFromTable = async (table, attributes, value) => {
 	let query = `DELETE FROM ${table} WHERE ${attributes} = "${value}"`;
-	
+
 	console.log(query);
 	try {
-		const [ret,fields] = await promisePool.query( query);
-		return ret
-	}catch (err){
-		return {err: "Error", data: err};
+		const [ret, fields] = await promisePool.query(query);
+		return ret;
+	} catch (err) {
+		return { err: 'Error', data: err };
 	}
 };

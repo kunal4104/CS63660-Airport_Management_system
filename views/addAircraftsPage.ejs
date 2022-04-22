@@ -4,10 +4,11 @@
 		<title>index</title>
 		<link rel="stylesheet" href="/css/style.css" />
 		<script src="js/addAircraftsPage.js"></script>
-    <script src="js/logout.js"></script>
+		<script src="js/logout.js"></script>
 	</head>
 	<body>
-		<div class="headerDiv">
+		<%- include('adminNav.ejs') %>
+		<!-- <div class="headerDiv">
             <a href="/admin"><img class="avatar" src="/images/back_button.png"></a>
 			<h1>ADD AIRCRAFTS <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
 			
@@ -23,41 +24,45 @@
       <a href="#">Schedule Check</a>
       <a id="logout" href="#">Logout</a>
 		</div>
+		</div> -->
 		<div>
-            <form>
-                <label for="aModelLabel">Model:</label>
-                <select id="aModel" name="aModel">
-                  <option value="Blank"></option>
-                </select>
-                <br><br>
+			<form>
+				<label for="aModelLabel">Model:</label>
+				<select id="aModel" name="aModel">
+					<option value="Blank"></option>
+				</select>
+				<br /><br />
 
-                <label for="aRegNum">Registration Number:</label>
-                <input type="text" id="aRegNum" name="aRegNum"><br><br>
-                
-                <label id="aBuildLabel" for="addExpertise">Name:</label>
-                <input  type="text" id="aBuild" name="aBuild" disabled><br><br>
+				<label for="aRegNum">Registration Number:</label>
+				<input type="text" id="aRegNum" name="aRegNum" /><br /><br />
 
-                <label for="aCapacityLabel">Capacity:</label>
-                <input type="text" id="aCapacity" name="aCapacity" disabled><br><br>
-    
-                
-                <label id="aWeightLabel" for="aWeight">Weight:</label>
-                <input type="text" id="aWeight" name="aWeight" disabled><br><br>
-    
-                <button type="button" id="btnaddAircraft" >Save</button>
-                <button type="button" id="btncancelAddAircraft" >Cancel</button>
-                
-              </form>
+				<label id="aBuildLabel" for="addExpertise">Name:</label>
+				<input type="text" id="aBuild" name="aBuild" disabled /><br /><br />
 
-              <div id="addAircraftSuccess" class="alert success hideInfo">
-                <span class="closebtn">&times;</span>  
-                <strong>Success!</strong> Aircraft Added successfully.
-              </div>
-              
-              <div id="addAircraftError" class="alert hideInfo">
-                <span class="closebtn">&times;</span>  
-                <strong>Error!</strong> Unable to add Aircraft.
-              </div>
+				<label for="aCapacityLabel">Capacity:</label>
+				<input
+					type="text"
+					id="aCapacity"
+					name="aCapacity"
+					disabled
+				/><br /><br />
+
+				<label id="aWeightLabel" for="aWeight">Weight:</label>
+				<input type="text" id="aWeight" name="aWeight" disabled /><br /><br />
+
+				<button type="button" id="btnaddAircraft">Save</button>
+				<button type="button" id="btncancelAddAircraft">Cancel</button>
+			</form>
+
+			<div id="addAircraftSuccess" class="alert success hideInfo">
+				<span class="closebtn">&times;</span>
+				<strong>Success!</strong> Aircraft Added successfully.
+			</div>
+
+			<div id="addAircraftError" class="alert hideInfo">
+				<span class="closebtn">&times;</span>
+				<strong>Error!</strong> Unable to add Aircraft.
+			</div>
 		</div>
 	</body>
 </html>
