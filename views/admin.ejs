@@ -3,6 +3,8 @@
 	<head>
 		<title>index</title>
 		<link rel="stylesheet" href="/css/style.css" />
+		<!-- <script src="js/chart.js"></script> -->
+		<script src="js/chart.min.js"></script>
 		<script src="js/admin.js"></script>
 	</head>
 	<body>
@@ -10,7 +12,7 @@
 			<h1>ADMIN HOME PAGE <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
 			
 		</div>
-
+		
 		<div class="topnav">
 			<a class="active" href="/admin">DashBoard</a>
 			<a href="/addEmployee">Add Employee</a>
@@ -20,16 +22,19 @@
 			<a href="/addUnion">Add Union</a>
             <a href="#">Schedule Check</a>
 		</div>
-		<div>
-			<table id="assignedJobsTable">
-				<tr>
-				  <th>JobId</th>
-				  <th>Flight Number</th>
-				  <th>Date Assigned</th>
-				  <th>Test Name</th>
-				  <th>Status</th>
-				</tr>
-			</table>
+		<div style="display: flex">
+			<div style="width: 250px; height: 250px">
+				<h6>Jobs Info</h6>
+				<canvas id="jobsChart" style="max-width:100%;max-height:100%"></canvas>
+			</div>
+
+			<div style="width: 250px; height: 250px">
+				<h6>Employee Info</h6>
+				<canvas id="allEmployees" style="max-width:100%;max-height:100%"></canvas>
+			</div>
+
 		</div>
+		
+		
 	</body>
 </html>

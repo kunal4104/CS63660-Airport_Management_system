@@ -28,4 +28,6 @@ router.get('/pastJobs', viewsController.pastJobs);
 router.get('/addAircraftModels', viewsController.addAircraftsModelPage);
 router.get('/addFaaTest', viewsController.addFaaTest);
 router.get('/addUnion', viewsController.addUnion);
+router.get('/allJobs', viewsController.allJobs);
+
 module.exports = router;
