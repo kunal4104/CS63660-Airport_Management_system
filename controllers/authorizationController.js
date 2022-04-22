@@ -29,7 +29,7 @@ exports.protect = async (req, res, next) => {
 	) {
 		token = req.headers.authorization.split(' ')[1];
 	} else if (req.cookies.jasonwebtoken) {
-		console.log(req.cookies);
+		// console.log(req.cookies);
 		token = req.cookies.jasonwebtoken;
 	}
 
@@ -39,10 +39,10 @@ exports.protect = async (req, res, next) => {
 		);
 	}
 
-	console.log(token);
+	// console.log(token);
 	try {
 		const decoded = await jsonwebtoken.verify(token, process.env.JWT_SECRET);
-		console.log(decoded);
+		// console.log(decoded);
 
 		// let user = await factoryController.getById('user_login', decoded.user_id);
 		var user = await factory.getByAttribute('user_login', {
