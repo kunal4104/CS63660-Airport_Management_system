@@ -36,4 +36,8 @@ exports.pastJobs = (req, res, next) => {
 exports.addAircraftsModelPage = (req, res, next) => {
 	res.status(200).render('addAircraftModels');
 };
+exports.addFaaTest = (req, res, next) => {
+	res.status(200).render('addFaaTest');
+};
+
 
