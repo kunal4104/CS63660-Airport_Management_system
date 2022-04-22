@@ -1,7 +1,6 @@
 const factory = require('./factoryController');
 const AppError = require('./../utils/appError');
 const authController = require('../controllers/authorizationController');
-
 exports.signup = (req, res, next) => {
 	next();
 };
@@ -17,7 +16,7 @@ exports.login = async (req, res, next) => {
 	console.log(req);
 	try {
 		const { user_id, password } = req.body;
-
+		const user = req.user;
 		if (!user_id || !password) {
 			return next(new AppError('Please provide user_id and password', 400));
 		}
@@ -75,14 +74,17 @@ exports.updatePassword = (req, res, next) => {
 };
 
 exports.userProfile = async (req, res, next) => {
-	const rows = await factory.getByAttribute('employees', { SSN: '1122334455' });
+	const user = req.user;
+	var ssnvalue = await factory.getSSN('employees', { user_id: user.user_id });
+	console.log(ssnvalue);
+	const rows = await factory.getByAttribute('employees', { SSN: ssnvalue[0].SSN });
 
 	const techRows = await factory.getByAttribute('technician', {
-		SSN: '1122334455',
+		SSN: ssnvalue[0].SSN,
 	});
 
 	const atcRows = await factory.getByAttribute('ATC_employees', {
-		SSN: '1122334455',
+		SSN: ssnvalue[0].SSN,
 	});
 
 	// if techRows.length() == 0 {
@@ -133,11 +135,17 @@ exports.saveProfile = async (req, res, next) => {
 };
 
 exports.updateUnion = async (req, res, next) => {
+	console.log('Im here');
 	const data = req.body;
+	const user = req.user;
+	console.log("user", user);	
+	var ssnvalue = await factory.getSSN('employees', { user_id: user.user_id });
+	console.log("ssnvalue", ssnvalue[0].SSN);
 	union_membership = await factory.getCountMembershipAttribute('employees', {'union_id': data.union_id});
+	console.log("union_membership", union_membership[0].max_count);
 	const message = await factory.updateTable(
 		'employees',
-		{'union_id' : data.union_id, 'union_membership' : union_membership+1},
-		{'SSN': data.SSN},
+		{'union_id' : data.union_id, 'union_membership': union_membership[0].max_count + 1},
+		{'SSN': ssnvalue[0].SSN},
 	);
 }

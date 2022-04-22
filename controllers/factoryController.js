@@ -64,7 +64,7 @@ exports.updateTable = async (table, attributes = {}, data = {}) => {
 };
 
 exports.getCountMembershipAttribute = async (table, attributes = {}) => {
-	let selectQuery = `SELECT max(union_membership) FROM ${table}`;
+	let selectQuery = `SELECT max(union_membership) as 'max_count' FROM ${table}`;
 	if (Object.keys(attributes).length > 0) {
 		selectQuery += " WHERE TRUE";
 		for(var key in attributes) {
@@ -75,4 +75,35 @@ exports.getCountMembershipAttribute = async (table, attributes = {}) => {
 	console.log(selectQuery);
 	const [rows, fields] = await promisePool.query(selectQuery);
 	return rows;
+};
+
+exports.getSSN = async (table, attributes = {}) => {
+	let selectQuery = `SELECT SSN FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
+};
+
+exports.updateTableForUnion = async (table, attributes = {}, data = {}) => {
+	let query = `UPDATE ${table} SET`;
+	var nullvalue = null;
+	for(var key in attributes) {
+		if (key == undefined){
+			query += ` ${key} = nullvalue,`;
+		}
+		else {
+			query += ` ${key} = "${attributes[key]}",`;
+		}
+	}
+
+	console.log(query);
+	const [ret, fields] = await promisePool.query(query);
+	return ret;
 };
