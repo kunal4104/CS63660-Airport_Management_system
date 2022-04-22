@@ -1,7 +1,8 @@
 window.addEventListener('load', function () {
     document.getElementById("selectJob").addEventListener("change", showFlightAndTestName);
     document.getElementById("submitReport").addEventListener("click", submitReport);
-    pendingJobs = {}
+    pendingJobs = [];
+    faaTests = [];
 
     function getAssignedJobs() {
 		var xhr = new XMLHttpRequest();
@@ -12,7 +13,7 @@ window.addEventListener('load', function () {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
 					pendingJobs = rtrn.data;
-					populate(rtrn.data);
+                    getAllFaaTest();
 				}
 			}
 		};
@@ -21,9 +22,25 @@ window.addEventListener('load', function () {
 
     getAssignedJobs();
 
-    function populate(assignedJobs) {
+    function getAllFaaTest() {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', '/api/v1/airplane/test', true);
+		xhr.send();
+		xhr.onload = function () {
+			if (xhr.status === 200) {
+				var rtrn = JSON.parse(xhr.responseText);
+				if (rtrn.status == 'success') {
+					console.log(rtrn.data);
+					faaTests = rtrn.data;
+					populate();
+				}
+			}
+		};
+	}
+
+    function populate() {
         var selectTag = document.getElementById("selectJob");
-        assignedJobs.forEach((job) => {
+        pendingJobs.forEach((job) => {
             var option = document.createElement("option");
             option.text = job.job_id;
             selectTag.add(option);
@@ -33,11 +50,13 @@ window.addEventListener('load', function () {
     function showFlightAndTestName() {
         var selectTagValue = document.getElementById("selectJob").value;
         var job = pendingJobs.find(x => x.job_id == selectTagValue);
+        var test = faaTests.find(x => x.test_num == job.test_id);
         document.getElementById("div1").style.display = "block";
         document.getElementById("flightNo").innerHTML = job.flight_num;
         document.getElementById("div2").style.display = "block";
-        document.getElementById("testName").innerHTML = job.test_id;
+        document.getElementById("testName").innerHTML = test.name;
         document.getElementById("uscore").value = "";
+        document.getElementById("max_score").innerHTML = " / "+test.max_score;
         document.getElementById("ufDate").value = "";
         document.getElementById("uhr").value = "";
     }

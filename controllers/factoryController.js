@@ -58,9 +58,10 @@ exports.getByCustomQuery = async (query) => {
 
 exports.updateTable = async (table, attributes = {}, data = {}) => {
 	let query = `UPDATE ${table} SET`;
-	var nullvalue = null;
 	for(var key in attributes) {
-		query += ` ${key} = "${attributes[key]}",`;
+		if (attributes[key]) {
+			query += ` ${key} = "${attributes[key]}",`;
+		}
 	}
 
 	query = query.slice(0, -1);
