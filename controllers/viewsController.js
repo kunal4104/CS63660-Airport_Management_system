@@ -48,6 +48,9 @@ exports.addJobReport = (req, res, next) => {
 exports.addUnion = (req, res, next) => {
 	res.status(200).render('addUnion');
 };
+exports.allJobs = (req, res, next) => {
+	res.status(200).render('allJobs');
+};	
 exports.updatePassword = (req, res, next) => {
 	res.status(200).render('updatePassword');
 };

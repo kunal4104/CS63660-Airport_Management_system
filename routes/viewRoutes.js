@@ -51,6 +51,10 @@ router.get(
 );
 router.get('/pastJobs', viewsController.pastJobs);
 
+
+router.get('/addUnion', viewsController.addUnion);
+router.get('/allJobs', viewsController.allJobs);
+
 router.get(
 	'/addAircraftModels',
 	authController.restrictTo('admin'),

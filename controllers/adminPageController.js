@@ -201,6 +201,73 @@ exports.addNewUnion = async (req, res, next) => {
 		});
 	}
 };
+exports.getAllJobs = async(req, res, next) => {
+	const message_get_aircraft_models = await factory.getAll(
+		'jobs'
+	);
+
+    if (!message_get_aircraft_models.err) {
+        res.status(200).json({
+            status: 'success',
+            token: 'token',
+            data: message_get_aircraft_models,
+        });
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message_get_aircraft_models.info},
+        });
+    }
+};
+exports.getAllEmployees = async(req, res, next) => {
+	const message_get_all_employees = await factory.getAll(
+		'employees'
+	);
+
+    const message_get_all_technicians = await factory.getAll(
+		'technician'
+	);
+
+    const message_get_all_FAA = await factory.getAll(
+		'ATC_employees'
+	);
+
+    if (!message_get_all_employees.err) {
+        res.status(200).json({
+            status: 'success',
+            token: 'token',
+            data: {all: message_get_all_employees, technician: message_get_all_technicians, FAA: message_get_all_FAA},
+        });
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message_get_all_employees.info},
+        });
+    }
+};
+exports.getAllAircrafts = async(req, res, next) => {
+	const message_get_aircrafts = await factory.getAll(
+		'aircrafts'
+	);
+
+    if (!message_get_aircrafts.err) {
+        res.status(200).json({
+            status: 'success',
+            token: 'token',
+            data: message_get_aircrafts,
+        });
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message_get_aircrafts.info},
+        });
+    }
+};
+
+
 
 exports.getTechnician = async (req, res, next) => {
 	const technicians = await factory.getAll('technician');
