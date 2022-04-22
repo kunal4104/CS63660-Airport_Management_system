@@ -1,7 +1,7 @@
 const express = require('express');
 const loginPageController = require('../controllers/loginPageController');
 const jobController = require('../controllers/jobController');
-
+const unionTableController = require('../controllers/unionTableController');
 const router = express.Router();
 
 router.post('/signup', loginPageController.signup);
@@ -17,5 +17,6 @@ router.get('/userProfile', loginPageController.userProfile);
 router.post('/saveProfile', loginPageController.saveProfile);
 
 router.get('/assignedJobs', jobController.getAssignedJobs);
-
+router.post('/updateUnion', loginPageController.updateUnion);
+router.get('/union/:id', unionTableController.getUnionDetails);
 module.exports = router;

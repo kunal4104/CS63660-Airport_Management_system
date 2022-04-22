@@ -88,6 +88,7 @@ exports.saveProfile = async (req, res, next) => {
 	);
 
 
+
 	console.log(message)
 	// console.log(rows);
 	res.status(200).json({
@@ -97,4 +98,12 @@ exports.saveProfile = async (req, res, next) => {
 	});
 };
 
-
+exports.updateUnion = async (req, res, next) => {
+	const data = req.body;
+	union_membership = await factory.getCountMembershipAttribute('employees', {'union_id': data.union_id});
+	const message = await factory.updateTable(
+		'employees',
+		{'union_id' : data.union_id, 'union_membership' : union_membership+1},
+		{'SSN': data.SSN},
+	);
+}

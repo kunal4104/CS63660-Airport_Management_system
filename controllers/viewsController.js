@@ -18,3 +18,6 @@ exports.membersPage = (req, res, next) => {
 exports.profilePage = (req, res, next) => {
 	res.status(200).render('profileSettings');
 }
+exports.unionMembersPage = (req, res, next) => {
+	res.status(200).render('viewAllMembers');
+}

@@ -42,8 +42,14 @@ exports.getByCustomQuery = async (query) => {
 
 exports.updateTable = async (table, attributes = {}, data = {}) => {
 	let query = `UPDATE ${table} SET`;
+	var nullvalue = null;
 	for(var key in attributes) {
-		query += ` ${key} = "${attributes[key]}",`;
+		if (key == undefined){
+			query += ` ${key} = nullvalue,`;
+		}
+		else {
+			query += ` ${key} = "${attributes[key]}",`;
+		}
 	}
 
 	query = query.slice(0, -1);
@@ -57,4 +63,18 @@ exports.updateTable = async (table, attributes = {}, data = {}) => {
 		query
 	);
 	return ret;
+};
+
+exports.getCountMembershipAttribute = async (table, attributes = {}) => {
+	let selectQuery = `SELECT max(union_membership) FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
 };

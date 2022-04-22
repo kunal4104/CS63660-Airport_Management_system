@@ -1,5 +1,6 @@
 const express = require('express');
 const viewsController = require('../controllers/viewsController');
+const { route } = require('./loginRoutes');
 
 const router = express.Router();
 
@@ -11,4 +12,5 @@ router.get('/index', viewsController.indexPage);
 router.get('/union', viewsController.unionPage);
 router.get('/member', viewsController.membersPage);
 router.get('/profile', viewsController.profilePage);
+router.get('/unionMembers', viewsController.unionMembersPage);
 module.exports = router;

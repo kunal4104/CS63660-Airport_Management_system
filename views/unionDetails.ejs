@@ -3,19 +3,30 @@
 	<head>
 		<title>Union Details</title>
 		<link rel="stylesheet" href="/css/style.css" />
+    <script src="js/unionDetails.js"></script>
 	</head>
 	<body>
         <h1>UNION</h1>
 		<form>
-            <label for="uname">Union name:</label>
+            <label for="uid">Union ID (required): </label>
+            <input type="text" id="union_id" name="uid" required><br><br>
+            <label for="uname">Union Name:</label>
             <input type="text" id="uname" name="uname"><br><br>
             <label for="startDate">Started On:</label>
             <input type="text" id="startDate" name="startDate"><br><br>
             <label for="Lname">Leader Name:</label>
             <input type="text" id="lname" name="lname"><br><br>
-            <button type="button" onclick="viewallmembers()" >View All Members</button>
-            <button type="button" onclick="join()" >Join</button>
-            <button type="button" onclick="leave()" >Leave</button>
-          </form>
+            <button id="get_union_members">View All Members</button>
+            <button type="button" id="btnUnionJoin">Join</button>
+            <button type="button" id="btnUnionLeave">Leave</button>
+    </form>
+        <div id="union_members_table" style="display:none">
+            <table id="unionMembersTable">
+            <tr>
+                <th>Member Name</th>
+                <th>Membership ID</th>
+            </tr>
+          </table>
+    </div>
 	</body>
 </html>
