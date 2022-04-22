@@ -34,4 +34,15 @@ exports.addAircraftsPage = (req, res, next) => {
 };
 exports.pastJobs = (req, res, next) => {
 	res.status(200).render('viewPastJobs');
+}
+exports.addAircraftsModelPage = (req, res, next) => {
+	res.status(200).render('addAircraftModels');
 };
+exports.addFaaTest = (req, res, next) => {
+	res.status(200).render('addFaaTest');
+};
+exports.addUnion = (req, res, next) => {
+	res.status(200).render('addUnion');
+};
+
+

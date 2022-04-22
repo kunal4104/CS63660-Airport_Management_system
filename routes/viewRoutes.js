@@ -27,4 +27,7 @@ router.get('/unionMembers', viewsController.unionMembersPage);
 router.get('/addEmployee', viewsController.addEmployeePage);
 router.get('/addAircrafts', viewsController.addAircraftsPage);
 router.get('/pastJobs', viewsController.pastJobs);
+router.get('/addAircraftModels', viewsController.addAircraftsModelPage);
+router.get('/addFaaTest', viewsController.addFaaTest);
+router.get('/addUnion', viewsController.addUnion);
 module.exports = router;
