@@ -16,6 +16,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const loginRouter = require('./routes/loginRoutes');
 const viewRoutes = require('./routes/viewRoutes');
 const adminRouter = require('./routes/adminRoutes');
+const airplaneRouter = require('./routes/airplaneRoutes');
 
 // Start express app
 const app = express();
@@ -70,6 +71,7 @@ app.use((req, res, next) => {
 //Routes
 app.use('/api/v1/user', loginRouter);
 app.use('/api/v1/admin', adminRouter);
+app.use('/api/v1/airplane', airplaneRouter);
 app.use('/', viewRoutes);
 
 app.all('*', (req, res, next) => {

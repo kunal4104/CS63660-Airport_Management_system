@@ -15,5 +15,6 @@ router.get('/getAllEmployees', adminPageController.getAllEmployees);
 router.get('/getAllAircrafts', adminPageController.getAllAircrafts);
 
 
+router.get('/technician', adminPageController.getTechnician);
 
 module.exports = router;

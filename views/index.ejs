@@ -4,6 +4,7 @@
 		<title>index</title>
 		<link rel="stylesheet" href="/css/style.css" />
 		<script src="js/index.js"></script>
+		<script src="js/logout.js"></script>
 	</head>
 	<body>
 		<div class="headerDiv">
@@ -12,10 +13,12 @@
 		</div>
 
 		<div class="topnav">
-			<a class="active" href="#">View Assigned Jobs</a>
-			<a href="#">Add Report</a>
+			<a class="active" href="/index">View Assigned Jobs</a>
+			<a href="/addJobReport">Add Report</a>
 			<a href="/pastJobs">View Past Jobs</a>
-			<a href="#">Find Union</a>
+			<a href="/union">Find Union</a>
+			<a id="logout" href="#">Logout</a>
+			
 		</div>
 		<div>
 			<table id="assignedJobsTable">
