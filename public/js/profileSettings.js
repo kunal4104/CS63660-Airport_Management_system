@@ -1,22 +1,4 @@
 window.addEventListener('load', function () {
-	// function login() {
-	// 	console.log('login');
-	// 	var xhr = new XMLHttpRequest();
-	// 	xhr.open('post', '/api/v1/user/login', true);
-	// 	xhr.onload = function () {
-	// 		if (xhr.status === 200) {
-	// 			var rtrn = JSON.parse(xhr.responseText);
-	// 			if (rtrn.status == 'success') {
-	// 				window.location.href = '/index';
-	// 			}
-	// 		}
-	// 	};
-	// 	xhr.send();
-	// }
-	// const tryLogin = document.getElementById('Login');
-	// console.log(tryLogin);
-	// tryLogin.addEventListener('click', login);
-    // document.getElementById("ProfileButton").addEventListener("click", getUserProfile);
     var userProfile = {}
     var uname = document.getElementById("uname");
     var uSSN = document.getElementById("uSSN");
@@ -31,25 +13,25 @@ window.addEventListener('load', function () {
     var expertiseLable = document.getElementById("expertiseLable");
     var uUtdLable = document.getElementById("uUtdLable");
     // var saveProfileSettings = document.getElementById("");
-
+    var btnUpdatePaasswordPageRedirect = document.getElementById("btnUpdatePasswordPage");
     document.getElementById("saveProfileSettings").addEventListener("click", saveProfileSettings);
-    
+
     function getUserProfile() {
         var xhr = new XMLHttpRequest();
-		xhr.open('GET', '/api/v1/user/userProfile', true);
+        xhr.open('GET', '/api/v1/user/userProfile', true);
         xhr.send();
-		xhr.onload = function () {
-			if (xhr.status === 200) {
-				var rtrn = JSON.parse(xhr.responseText);
-				if (rtrn.status == 'success') {
-					// userProfile.name = rtrn.data[0].name
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var rtrn = JSON.parse(xhr.responseText);
+                if (rtrn.status == 'success') {
+                    // userProfile.name = rtrn.data[0].name
                     // userProfile.ssn = rtrn.data[0].SSN
                     userProfile = rtrn.data[0]
                     fillValues(rtrn.data[0])
-				}
-			}
-		};
-		
+                }
+            }
+        };
+
     }
     getUserProfile();
 
@@ -65,7 +47,7 @@ window.addEventListener('load', function () {
         if (profileData.union_id && profileData.union_id > 0) {
             btnUnionLeave.style.visibility = "visible";
             btnUnionJoin.style.visibility = "hidden";
-        }else {
+        } else {
             btnUnionLeave.style.visibility = "hidden";
             btnUnionJoin.style.visibility = "visible";
         }
@@ -80,7 +62,7 @@ window.addEventListener('load', function () {
             uUtdLable.style.display = "none";
             // uUtd.remove();
             // uUtdLable.remove();
-        }else {
+        } else {
             uUtd.value = profileData.last_testDate
             uUtd.style.visibility = "visible";
             uExpertise.style.visibility = "hidden";
@@ -115,14 +97,14 @@ window.addEventListener('load', function () {
         //Send the proper header information along with the request
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         let urlEncodedData = "", urlEncodedDataPairs = [], name;
-        for( name in postObj ) {
-            urlEncodedDataPairs.push(encodeURIComponent(name)+'='+encodeURIComponent(postObj[name]));
+        for (name in postObj) {
+            urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(postObj[name]));
         }
         urlEncodedData = urlEncodedDataPairs.join("&");
-        http.onreadystatechange = function() {//Call a function when the state changes.
-            if(http.readyState == 4 && http.status == 200) {
+        http.onreadystatechange = function () {//Call a function when the state changes.
+            if (http.readyState == 4 && http.status == 200) {
                 showUpdateInfo("success");
-            }else if (http.readyState == 4 && http.status != 200){
+            } else if (http.readyState == 4 && http.status != 200) {
                 showUpdateInfo("error");
             }
         }
@@ -135,7 +117,7 @@ window.addEventListener('load', function () {
         if (state === "success") {
             uErrorDialog.classList.add("hideInfo")
             successDiv.classList.add("showInfo")
-        }else {
+        } else {
             successDiv.classList.add("hideInfo")
             uErrorDialog.classList.add("showInfo")
         }
@@ -145,11 +127,16 @@ window.addEventListener('load', function () {
         var i;
 
         for (i = 0; i < close.length; i++) {
-            close[i].onclick = function(){
+            close[i].onclick = function () {
                 var div = this.parentElement;
                 div.style.opacity = "0";
-                setTimeout(function(){ div.style.display = "none"; }, 600);
+                setTimeout(function () { div.style.display = "none"; }, 600);
             }
         }
     }
+
+    btnUpdatePaasswordPageRedirect.addEventListener("click", function () {
+        window.location.href = "/updatePassword";
+    })
+
 });

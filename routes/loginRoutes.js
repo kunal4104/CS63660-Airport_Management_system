@@ -8,10 +8,8 @@ const router = express.Router();
 
 router.post('/signup', loginPageController.signup);
 router.post('/login', loginPageController.login);
-
+router.post('/logout', loginPageController.logout);
 router.use(authController.protect);
-
-router.get('/logout', loginPageController.logout);
 
 router.post('/forgotPassword', loginPageController.forgotPassword);
 router.patch('/resetPassword/:token', loginPageController.resetPassword);
@@ -20,7 +18,7 @@ router.patch('/updatePassword', loginPageController.updatePassword);
 
 router.get('/userProfile', loginPageController.userProfile);
 router.post('/saveProfile', loginPageController.saveProfile);
-
+router.post('/updatePassword', loginPageController.updatePassword);
 router.get('/assignedJobs', jobController.getAssignedJobs);
 router.post('/updateUnion', loginPageController.updateUnion);
 router.get('/union/:id', unionTableController.getUnionDetails);

@@ -55,11 +55,15 @@ exports.login = async (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
+	console.log('Im here');
 	res.cookie('jasonwebtoken', 'loggedout', {
 		expires: new Date(Date.now() + 10 * 1000),
 		httpOnly: true,
 	});
-	res.status(200).json({ status: 'success' });
+	res.status(200).json({ 
+		status: 'success' 
+	});
+
 };
 
 exports.resetPassword = (req, res, next) => {
@@ -167,4 +171,39 @@ exports.updateUnion = async (req, res, next) => {
 	// 	status: 'error',
 	// 	data: error.message,
 	// });
+}
+
+exports.updatePassword = async (req, res, next) => {
+	const data = req.body;
+	const user = req.user;
+	console.log("user", user);
+	var prevPass = await factory.getPassword('user_login', { user_id: user.user_id });
+	if (prevPass[0].password != data.oldpass) {
+		res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message.info},
+        });
+	} else {
+
+		const message = await factory.updateTable(
+			'user_login',
+			{'password' : data.newPass},
+			{'user_id': user.user_id},
+		);
+		console.log(message);
+		if (!message.err) {
+			res.status(200).json({
+				status: 'success',
+				token: 'token',
+				data: message,
+			});
+		}else {
+			res.status(409).json({
+				status: 'Failure',
+				token: 'token',
+				data: {info: message.info},
+			});
+		}
+}
 }

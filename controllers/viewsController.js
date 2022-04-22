@@ -44,5 +44,8 @@ exports.addFaaTest = (req, res, next) => {
 exports.addUnion = (req, res, next) => {
 	res.status(200).render('addUnion');
 };
+exports.updatePassword = (req, res, next) => {
+	res.status(200).render('updatePassword');
+}
 
 

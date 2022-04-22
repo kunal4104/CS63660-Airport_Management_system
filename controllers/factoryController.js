@@ -96,6 +96,19 @@ exports.getSSN = async (table, attributes = {}) => {
 	return rows;
 };
 
+exports.getPassword = async (table, attributes = {}) => {
+	let selectQuery = `SELECT password FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
+};
 
 exports.insertIntoTable = async (table, attributes = [], data = []) => {
 	let query = `INSERT INTO ${table} (`;
