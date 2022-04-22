@@ -175,5 +175,28 @@ exports.addFaaTest = async(req, res, next) => {
         });
     }
 };
+exports.addNewUnion = async(req, res, next) => {
+	const data = req.body;
+
+    const message_add_aircraft_model = await factory.insertIntoTable(
+		'unions',
+		['union_id', 'name', 'founder_name', 'founded_date'],
+        [data.union_id, data.name, data.founder_name, data.founded_date]
+	);
+    
+    if(!message_add_aircraft_model.err) {
+        res.status(200).json({
+            status: 'success',
+            token: 'token',
+            data: {info: message_add_aircraft_model.info},
+        });
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message_add_aircraft_model.info},
+        });
+    }
+};
 
 

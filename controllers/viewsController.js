@@ -39,5 +39,8 @@ exports.addAircraftsModelPage = (req, res, next) => {
 exports.addFaaTest = (req, res, next) => {
 	res.status(200).render('addFaaTest');
 };
+exports.addUnion = (req, res, next) => {
+	res.status(200).render('addUnion');
+};
 
 
