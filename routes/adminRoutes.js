@@ -14,6 +14,7 @@ router.get('/getAllJobs', adminPageController.getAllJobs);
 router.get('/getAllEmployees', adminPageController.getAllEmployees);
 router.get('/getAllAircrafts', adminPageController.getAllAircrafts);
 
+router.post('/assign', adminPageController.assignTask);
 
 router.get('/technician', adminPageController.getTechnician);
 
