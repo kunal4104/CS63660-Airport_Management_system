@@ -22,7 +22,9 @@ exports.membersPage = (req, res, next) => {
 exports.profilePage = (req, res, next) => {
 	res.status(200).render('profileSettings');
 }
-
+exports.unionMembersPage = (req, res, next) => {
+	res.status(200).render('viewAllMembers');
+};
 exports.addEmployeePage = (req, res, next) => {
 	res.status(200).render('addEmployee');
 };
@@ -42,5 +44,8 @@ exports.addFaaTest = (req, res, next) => {
 exports.addUnion = (req, res, next) => {
 	res.status(200).render('addUnion');
 };
+exports.updatePassword = (req, res, next) => {
+	res.status(200).render('updatePassword');
+}
 
 

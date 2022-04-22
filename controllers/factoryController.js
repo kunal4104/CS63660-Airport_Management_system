@@ -47,7 +47,8 @@ exports.getByCustomQuery = async (query) => {
 
 exports.updateTable = async (table, attributes = {}, data = {}) => {
 	let query = `UPDATE ${table} SET`;
-	for (var key in attributes) {
+	var nullvalue = null;
+	for(var key in attributes) {
 		query += ` ${key} = "${attributes[key]}",`;
 	}
 
@@ -58,8 +59,55 @@ exports.updateTable = async (table, attributes = {}, data = {}) => {
 	}
 
 	console.log(query);
-	const [ret, fields] = await promisePool.query(query);
-	return ret;
+	try {
+		const [ret,fields] = await promisePool.query(query);
+		return ret
+	}catch (err){
+		console.log(err)
+		return {err: "Error", data: err};
+	}
+};
+
+exports.getCountMembershipAttribute = async (table, attributes = {}) => {
+	let selectQuery = `SELECT max(union_membership) as 'max_count' FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
+};
+
+exports.getSSN = async (table, attributes = {}) => {
+	let selectQuery = `SELECT SSN FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
+};
+
+exports.getPassword = async (table, attributes = {}) => {
+	let selectQuery = `SELECT password FROM ${table}`;
+	if (Object.keys(attributes).length > 0) {
+		selectQuery += " WHERE TRUE";
+		for(var key in attributes) {
+			selectQuery += ` AND ${key} = "${attributes[key]}"`;
+		}
+	}
+
+	console.log(selectQuery);
+	const [rows, fields] = await promisePool.query(selectQuery);
+	return rows;
 };
 
 exports.insertIntoTable = async (table, attributes = [], data = []) => {

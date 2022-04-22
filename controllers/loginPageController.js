@@ -1,7 +1,6 @@
 const factory = require('./factoryController');
 const AppError = require('./../utils/appError');
 const authController = require('../controllers/authorizationController');
-
 exports.signup = (req, res, next) => {
 	next();
 };
@@ -17,7 +16,7 @@ exports.login = async (req, res, next) => {
 	console.log(req);
 	try {
 		const { user_id, password } = req.body;
-
+		const user = req.user;
 		if (!user_id || !password) {
 			return next(new AppError('Please provide user_id and password', 400));
 		}
@@ -56,11 +55,15 @@ exports.login = async (req, res, next) => {
 };
 
 exports.logout = (req, res, next) => {
+	console.log('Im here');
 	res.cookie('jasonwebtoken', 'loggedout', {
 		expires: new Date(Date.now() + 10 * 1000),
 		httpOnly: true,
 	});
-	res.status(200).json({ status: 'success' });
+	res.status(200).json({ 
+		status: 'success' 
+	});
+
 };
 
 exports.resetPassword = (req, res, next) => {
@@ -75,14 +78,17 @@ exports.updatePassword = (req, res, next) => {
 };
 
 exports.userProfile = async (req, res, next) => {
-	const rows = await factory.getByAttribute('employees', { SSN: '1122334455' });
+	const user = req.user;
+	var ssnvalue = await factory.getSSN('employees', { user_id: user.user_id });
+	console.log(ssnvalue);
+	const rows = await factory.getByAttribute('employees', { SSN: ssnvalue[0].SSN });
 
 	const techRows = await factory.getByAttribute('technician', {
-		SSN: '1122334455',
+		SSN: ssnvalue[0].SSN,
 	});
 
 	const atcRows = await factory.getByAttribute('ATC_employees', {
-		SSN: '1122334455',
+		SSN: ssnvalue[0].SSN,
 	});
 
 	// if techRows.length() == 0 {
@@ -121,6 +127,8 @@ exports.saveProfile = async (req, res, next) => {
 		{ SSN: data.SSN }
 	);
 
+
+
 	console.log(message);
 	// console.log(rows);
 	res.status(200).json({
@@ -129,3 +137,73 @@ exports.saveProfile = async (req, res, next) => {
 		data: { info: message.info },
 	});
 };
+
+exports.updateUnion = async (req, res, next) => {
+	console.log('Im here');
+	const data = req.body;
+	const user = req.user;
+	console.log("user", user);	
+	var ssnvalue = await factory.getSSN('employees', { user_id: user.user_id });
+	console.log("ssnvalue", ssnvalue[0].SSN);
+	union_membership = await factory.getCountMembershipAttribute('employees', {'union_id': data.union_id});
+	console.log("union_membership", union_membership[0].max_count);
+	const message = await factory.updateTable(
+		'employees',
+		{'union_id' : data.union_id, 'union_membership': union_membership[0].max_count + 1},
+		{'SSN': ssnvalue[0].SSN},
+	);
+	console.log(message);
+	if (!message.err) {
+        res.status(200).json({
+			status: 'success',
+			token: 'token',
+			data: message,
+		});
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message.info},
+        });
+    }
+	
+	// res.status(500).json({
+	// 	status: 'error',
+	// 	data: error.message,
+	// });
+}
+
+exports.updatePassword = async (req, res, next) => {
+	const data = req.body;
+	const user = req.user;
+	console.log("user", user);
+	var prevPass = await factory.getPassword('user_login', { user_id: user.user_id });
+	if (prevPass[0].password != data.oldpass) {
+		res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message.info},
+        });
+	} else {
+
+		const message = await factory.updateTable(
+			'user_login',
+			{'password' : data.newPass},
+			{'user_id': user.user_id},
+		);
+		console.log(message);
+		if (!message.err) {
+			res.status(200).json({
+				status: 'success',
+				token: 'token',
+				data: message,
+			});
+		}else {
+			res.status(409).json({
+				status: 'Failure',
+				token: 'token',
+				data: {info: message.info},
+			});
+		}
+}
+}
