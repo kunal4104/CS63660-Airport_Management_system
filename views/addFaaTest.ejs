@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>index</title>
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="js/addFaaTest.js"></script>
+	</head>
+	<body>
+		<div class="headerDiv">
+            <a href="/admin"><img class="avatar" src="/images/back_button.png"></a>
+			<h1>ADD FAA TEST <a href="/profile"><img class="avatar" src="/images/img_avatar.png"></a></h1>
+			
+		</div>
+
+		<div class="topnav">
+			<a href="/admin">DashBoard</a>
+			<a href="/addEmployee">Add Employee</a>
+			<a href="/addAircrafts">Add Aircrafts</a>
+            <a href="/addAircraftModels">Add Aircraft Model</a>
+			<a class="active" href="/addFaaTest">Add FAA Tests</a>
+			<a href="#">Add Union</a>
+            <a href="#">Schedule Check</a>
+		</div>
+		<div>
+            <form>
+                <label for="tName">Name:</label>
+                <input  type="text" id="tName" name="tName"><br><br>
+
+                <label for="tMax">Max Score:</label>
+                <input type="text" id="tMax" name="tMax"><br><br>
+    
+                <button type="button" id="btnAddFaaTestModel" >Save</button>
+                <button type="button" id="btncancelAddFaaTestModel" >Cancel</button>
+                
+              </form>
+
+              <div id="addfaaTestSuccess" class="alert success hideInfo">
+                <span class="closebtn">&times;</span>  
+                <strong>Success!</strong> Aircraft Model Added successfully.
+              </div>
+              
+              <div id="addfaaTestError" class="alert hideInfo">
+                <span class="closebtn">&times;</span>  
+                <strong>Error!</strong> Unable to add Aircraft Model.
+              </div>
+		</div>
+	</body>
+</html>
