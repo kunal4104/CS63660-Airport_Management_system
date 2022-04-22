@@ -1,22 +1,23 @@
 {
-  "name": "furniture_store",
+  "name": "airport_management_system",
   "version": "1.0.0",
-  "description": "final project for wpl6314",
+  "description": "final project for cs6360",
   "main": "server.js",
   "scripts": {
     "start:dev": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "start:debug": "nodemon --inspect server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kunal4104/WPL_Marketplace.git"
+    "url": "https://github.com/kunal4104/CS63660-Airport_Management_system"
   },
-  "author": "Kunal Singh, Suyansh bahrani, Sayan das",
+  "author": "Kunal Singh, Kumar Abhishek, Sajal Suhane, Abhishek Anand, Monica",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kunal4104/WPL_Marketplace/issues"
+    "url": "https://github.com/kunal4104/CS63660-Airport_Management_system/issues"
   },
-  "homepage": "https://github.com/kunal4104/WPL_Marketplace#readme",
+  "homepage": "https://github.com/kunal4104/CS63660-Airport_Management_system#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

@@ -24,5 +24,5 @@ router.get('/member', viewsController.membersPage);
 router.get('/profile', viewsController.profilePage);
 router.get('/addEmployee', viewsController.addEmployeePage);
 router.get('/addAircrafts', viewsController.addAircraftsPage);
-
+router.get('/pastJobs', viewsController.pastJobs);
 module.exports = router;

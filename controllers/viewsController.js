@@ -30,3 +30,6 @@ exports.addEmployeePage = (req, res, next) => {
 exports.addAircraftsPage = (req, res, next) => {
 	res.status(200).render('addAircraftsPage');
 };
+exports.pastJobs = (req, res, next) => {
+	res.status(200).render('viewPastJobs');
+}
