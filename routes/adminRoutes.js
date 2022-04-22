@@ -10,6 +10,7 @@ router.post('/addAircrafts', adminPageController.addAircraft);
 router.post('/addAircraftsModels', adminPageController.addAircraftModels);
 router.post('/addFaaTest', adminPageController.addFaaTest);
 router.post('/addNewUnion', adminPageController.addNewUnion);
+router.post('/assign', adminPageController.assignTask);
 
 router.get('/technician', adminPageController.getTechnician);
 
