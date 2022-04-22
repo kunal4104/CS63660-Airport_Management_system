@@ -1,15 +1,10 @@
-// const { Chart } = require("chart.js");
-
-// import { Chart } from './chart.js';
-
 window.addEventListener('load', function () {
-    var aircraftData = {};
-    var faaTestData = {};
+    aircraftData = {};
+    faaTestData = {};
+    jobsData = {};
     function getUserProfile() {
         getAllJobs();
         getAllEmployees();
-        // getAllAircrafts();
-        // getAllFaaTest();
         // createAircraftChart();
     }
 
@@ -23,7 +18,8 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-                    createJobChart(rtrn.data)
+                    createJobChart(rtrn.data);
+                    getAllAircrafts();
 				}
 			}
 		};
@@ -32,6 +28,7 @@ window.addEventListener('load', function () {
     function createJobChart(jobData) {
         // oSaveALLJobs.data = jobData;
         console.log(jobData);
+        jobsData = jobData;
         let newCount =0
         let inProgressCount = 0;
         let completedCount =0;
@@ -129,13 +126,97 @@ window.addEventListener('load', function () {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
                     aircraftData = rtrn.data;
+                    // saveVals(aircraftData);
+                    getAllFaaTest();
+                    
 				}
 			}
 		};
     }
 
-    function createAircraftChart(aircraftData) {
+    function getAllFaaTest() {
+        var xhr = new XMLHttpRequest();
+		xhr.open('GET', '/api/v1/airplane/test', true);
+		xhr.send();
+		xhr.onload = function () {
+			if (xhr.status === 200) {
+				var rtrn = JSON.parse(xhr.responseText);
+				if (rtrn.status == 'success') {
+					faaTestData =rtrn.data;
+                    createAircraftChart();
+				}
+			}
+		};
+    }
+    var aircraftTest = {}
+    function createAircraftChart() {
+        aircraftData.forEach((airCraft) => {
+            aircraftTest[airCraft.registration_no] = [];
+            jobsData.forEach((job) => {
+                if (job.status == 2 && job.flight_num == airCraft.registration_no) {
+                    aircraftTest[airCraft.registration_no].push(job);
+                }
+            });
+        });
+        createFaaTestMap();
+        getAirCraftTestScore();
+        // console.log(aircraftTest)
+    }
+    testScoreMap = {};
+    function createFaaTestMap() {
+        faaTestData.forEach((test) => {
+            testScoreMap[test['test_num']]= test.max_score;
+        })
+    }
+
+    function getAirCraftTestScore() {
+        let passAircrafts = 0;
+        let failAircrafts = 0;
+
+        for (k in aircraftTest) {
+            if (aircraftTest[k].length > 0) {
+                pass = 0
+                aircraftTest[k].forEach((report) => {
+                    if (report.score >= (testScoreMap[report.test_id] * .8)) {
+                        pass++
+                    }
+                });
+
+                if (pass == aircraftTest[k].length) {
+                    passAircrafts++;
+                }else {
+                    failAircrafts++
+                }
+            }else {
+                passAircrafts++;
+            }
+        }
+
+        var xValues = ["Pass", "Fail"];
+        var yValues = [passAircrafts, failAircrafts];
+        var barColors = [
+        "#b91d47",
+        "#00aba9"
+        ];
+
+        new Chart("allAircrafts", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "All Jobs"
+            }
+        },
         
+        });
+
     }
 
     document.getElementById("jobsChart").addEventListener("click", showAllJobs);
