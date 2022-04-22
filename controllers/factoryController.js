@@ -24,8 +24,8 @@ exports.getAll = async (table) => {
 exports.getByAttribute = async (table, attributes = {}) => {
 	let selectQuery = `SELECT * FROM ${table}`;
 	if (Object.keys(attributes).length > 0) {
-		selectQuery += " WHERE TRUE";
-		for(var key in attributes) {
+		selectQuery += ' WHERE TRUE';
+		for (var key in attributes) {
 			selectQuery += ` AND ${key} = "${attributes[key]}"`;
 		}
 	}
@@ -53,15 +53,13 @@ exports.updateTable = async (table, attributes = {}, data = {}) => {
 	}
 
 	query = query.slice(0, -1);
-	query += " WHERE TRUE";
-	for(var key in data) {
+	query += ' WHERE TRUE';
+	for (var key in data) {
 		query += ` AND ${key} = "${data[key]}"`;
 	}
-	
+
 	console.log(query);
-	const [ret,fields] = await promisePool.query(
-		query
-	);
+	const [ret, fields] = await promisePool.query(query);
 	return ret;
 };
 
