@@ -148,4 +148,23 @@ exports.updateUnion = async (req, res, next) => {
 		{'union_id' : data.union_id, 'union_membership': union_membership[0].max_count + 1},
 		{'SSN': ssnvalue[0].SSN},
 	);
+	console.log(message);
+	if (!message.err) {
+        res.status(200).json({
+			status: 'success',
+			token: 'token',
+			data: message,
+		});
+    }else {
+        res.status(409).json({
+            status: 'Failure',
+            token: 'token',
+            data: {info: message.info},
+        });
+    }
+	
+	// res.status(500).json({
+	// 	status: 'error',
+	// 	data: error.message,
+	// });
 }

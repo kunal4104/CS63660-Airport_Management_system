@@ -49,12 +49,7 @@ exports.updateTable = async (table, attributes = {}, data = {}) => {
 	let query = `UPDATE ${table} SET`;
 	var nullvalue = null;
 	for(var key in attributes) {
-		if (key == undefined){
-			query += ` ${key} = nullvalue,`;
-		}
-		else {
-			query += ` ${key} = "${attributes[key]}",`;
-		}
+		query += ` ${key} = "${attributes[key]}",`;
 	}
 
 	query = query.slice(0, -1);
@@ -64,8 +59,13 @@ exports.updateTable = async (table, attributes = {}, data = {}) => {
 	}
 
 	console.log(query);
-	const [ret, fields] = await promisePool.query(query);
-	return ret;
+	try {
+		const [ret,fields] = await promisePool.query(query);
+		return ret
+	}catch (err){
+		console.log(err)
+		return {err: "Error", data: err};
+	}
 };
 
 exports.getCountMembershipAttribute = async (table, attributes = {}) => {
@@ -96,22 +96,6 @@ exports.getSSN = async (table, attributes = {}) => {
 	return rows;
 };
 
-exports.updateTableForUnion = async (table, attributes = {}, data = {}) => {
-	let query = `UPDATE ${table} SET`;
-	var nullvalue = null;
-	for(var key in attributes) {
-		if (key == undefined){
-			query += ` ${key} = nullvalue,`;
-		}
-		else {
-			query += ` ${key} = "${attributes[key]}",`;
-		}
-	}
-
-	console.log(query);
-	const [ret, fields] = await promisePool.query(query);
-	return ret;
-};
 
 exports.insertIntoTable = async (table, attributes = [], data = []) => {
 	let query = `INSERT INTO ${table} (`;

@@ -24,26 +24,7 @@ window.addEventListener('load', function () {
         
         
     }
-    function getUnionDetailsDropdown(event) {
-        var unionId = document.getElementById('union_id');
-        console.log(unionId);
-        event.preventDefault();
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', `api/v1/user/union/${unionId}`, true);
-        xhr.send();
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                var rtrn = JSON.parse(xhr.responseText);
-                if (rtrn.status == 'success') {
-                    console.log("Data", rtrn.data);
-                    fillValues(rtrn.data);
-                }
-            }
-        };
 
-        
-        
-    }
 
 
     function getUnions() {
@@ -89,6 +70,8 @@ window.addEventListener('load', function () {
         
     }
 
+
+    
 
     function populate(data) {
         var table = document.getElementById("unionMembersTable");
