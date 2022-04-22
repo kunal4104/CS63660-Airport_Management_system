@@ -14,11 +14,15 @@ router.use(authController.protect);
 // 	.get(authController.restrictTo('admin'), viewsController.indexPage);
 
 router.get('/index', viewsController.indexPage);
-router.get('/admin', viewsController.adminPage);
+router
+	.route('/admin')
+	.get(authController.restrictTo('admin'), viewsController.adminPage);
+// router.get('/admin', viewsController.adminPage);
 //console.log('router.get(/index');
 router.get('/union', viewsController.unionPage);
 router.get('/member', viewsController.membersPage);
 router.get('/profile', viewsController.profilePage);
 router.get('/addEmployee', viewsController.addEmployeePage);
+router.get('/addAircrafts', viewsController.addAircraftsPage);
 
 module.exports = router;

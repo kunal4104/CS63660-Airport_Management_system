@@ -13,12 +13,17 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 exports.getAll = async (table) => {
-	const [rows, fields] = await promisePool.query(`SELECT * FROM ${table}`);
-	// res.status(200).json({
-	// 	status: 'success',
-	// 	data: rows,
-	// });
-	return rows;
+	try {
+		const [rows, fields] = await promisePool.query(`SELECT * FROM ${table}`);
+		// res.status(200).json({
+		// 	status: 'success',
+		// 	data: rows,
+		// });
+		return rows;
+	}catch (err) {
+		return {err: "Error", data: err};
+	}
+	
 };
 
 exports.getByAttribute = async (table, attributes = {}) => {

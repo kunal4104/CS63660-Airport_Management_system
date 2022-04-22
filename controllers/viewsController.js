@@ -26,3 +26,7 @@ exports.profilePage = (req, res, next) => {
 exports.addEmployeePage = (req, res, next) => {
 	res.status(200).render('addEmployee');
 };
+
+exports.addAircraftsPage = (req, res, next) => {
+	res.status(200).render('addAircraftsPage');
+};

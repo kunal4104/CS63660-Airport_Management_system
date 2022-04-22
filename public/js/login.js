@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-					if (rtrn.data[0].type === "admin") {
+					if (rtrn.data.type === "admin") {
 						window.location.href = '/admin';
 					}else {
 						window.location.href = '/index';
