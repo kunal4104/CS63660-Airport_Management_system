@@ -56,6 +56,15 @@ exports.protect = async (req, res, next) => {
 		user = user[0];
 		user.password = undefined;
 
+		// console.log(user);
+		var type = user.type;
+		var details = await factory.getByAttribute('employees', {
+			user_id: user.user_id,
+		});
+		user = details[0];
+		user.type = type;
+		console.log(user);
+
 		req.user = user;
 		res.locals.user = user;
 
