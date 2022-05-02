@@ -62,7 +62,14 @@ window.addEventListener('load', function () {
             uUtdLable.style.display = "none";
             // uUtd.remove();
             // uUtdLable.remove();
-        } else {
+        }else if (!profileData.expertise && !profileData.last_testDate) {
+            uUtd.style.display = "none";
+            uUtdLable.style.display = "none";
+            uExpertise.style.disply = "none";
+            expertiseLable.style.disply = "none";
+            uExpertise.style.visibility = "hidden";
+            expertiseLable.style.visibility = "hidden";
+        }else {
             uUtd.value = profileData.last_testDate
             uUtd.style.visibility = "visible";
             uExpertise.style.visibility = "hidden";

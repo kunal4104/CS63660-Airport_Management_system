@@ -1,11 +1,10 @@
 window.addEventListener('load', function () {
     aircraftData = {};
+    airCraftModel = {};
     faaTestData = {};
     jobsData = {};
     function getUserProfile() {
         getAllJobs();
-        getAllEmployees();
-        // createAircraftChart();
     }
 
     getUserProfile();
@@ -18,8 +17,9 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-                    createJobChart(rtrn.data);
-                    getAllAircrafts();
+                    // createJobChart(rtrn.data);
+                    jobsData = rtrn.data;
+                    getAllAircraftModels();
 				}
 			}
 		};
@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
     function createJobChart(jobData) {
         // oSaveALLJobs.data = jobData;
         console.log(jobData);
-        jobsData = jobData;
+        
         let newCount =0
         let inProgressCount = 0;
         let completedCount =0;
@@ -70,51 +70,20 @@ window.addEventListener('load', function () {
 		
     }
 
-    function getAllEmployees() {
+    function getAllAircraftModels() {
         var xhr = new XMLHttpRequest();
-		xhr.open('GET', '/api/v1/admin/getAllEmployees', true);
+		xhr.open('GET', '/api/v1/admin/getAircraftModels', true);
         xhr.send();
 		xhr.onload = function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-                    createEmployeeChart(rtrn.data)
+                    airCraftModel = rtrn.data;
+                    getAllAircrafts();
+                    
 				}
 			}
 		};
-    }
-
-    function createEmployeeChart(empData) {
-        console.log(empData);
-        let techCount =empData.technician.length;
-        let FAACount = empData.FAA.length;
-
-        
-        
-        var xValues = ["Technician", "FAA employees"];
-        var yValues = [techCount, FAACount];
-        var barColors = [
-        "#b91d47",
-        "#00aba9"
-        ];
-
-        new Chart("allEmployees", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [{
-            backgroundColor: barColors,
-            data: yValues
-            }]
-        },
-        options: {
-            title: {
-            display: true,
-            text: "All Employees"
-            }
-        }
-        });
-		
     }
 
     function getAllAircrafts() {
@@ -127,6 +96,7 @@ window.addEventListener('load', function () {
 				if (rtrn.status == 'success') {
                     aircraftData = rtrn.data;
                     // saveVals(aircraftData);
+                    // fillAircraftTable()
                     getAllFaaTest();
                     
 				}
@@ -149,9 +119,11 @@ window.addEventListener('load', function () {
 		};
     }
     var aircraftTest = {}
+    var airCraftModelMap = {}
     function createAircraftChart() {
         aircraftData.forEach((airCraft) => {
             aircraftTest[airCraft.registration_no] = [];
+            airCraftModelMap[airCraft.registration_no] = airCraft.model;
             jobsData.forEach((job) => {
                 if (job.flight_num == airCraft.registration_no) {
                     aircraftTest[airCraft.registration_no].push(job);
@@ -168,12 +140,19 @@ window.addEventListener('load', function () {
             testScoreMap[test['test_num']]= test.max_score;
         })
     }
-
+    passAircraft = []
+    failAircrafts = []
     function getAirCraftTestScore() {
-        let passAircrafts = 0;
-        let failAircrafts = 0;
 
         for (k in aircraftTest) {
+            var modelInfo = getModelInfo(k);
+            var obj = {}
+
+            obj.reg_num = k;
+            obj.modelNum = modelInfo.model_num;
+            obj.weight = modelInfo.weight;
+            obj.capacity = modelInfo.capacity;
+
             if (aircraftTest[k].length > 0) {
                 pass = 0
                 aircraftTest[k].forEach((report) => {
@@ -183,52 +162,70 @@ window.addEventListener('load', function () {
                 });
 
                 if (pass == aircraftTest[k].length) {
-                    passAircrafts++;
+                    passAircraft.push(obj);
                 }else {
-                    failAircrafts++
+                    failAircrafts.push(obj)
                 }
             }else {
-                passAircrafts++;
+                passAircraft.push(obj);
             }
         }
+        console.log(passAircraft);
+        console.log(failAircrafts);
+        populateTables()
+    }
 
-        var xValues = ["Pass", "Fail"];
-        var yValues = [passAircrafts, failAircrafts];
-        var barColors = [
-        "#b91d47",
-        "#00aba9"
-        ];
-
-        new Chart("allAircrafts", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [{
-            backgroundColor: barColors,
-            data: yValues
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "All Jobs"
+    function getModelInfo(reg_num) {
+        let modelNum = airCraftModelMap[reg_num];
+        for (let i = 0; i < airCraftModel.length; i++) {
+            if (airCraftModel[i].model_num == modelNum) {
+                return airCraftModel[i];
             }
-        },
+        }
+    }
+
+    function populateTables() {
+        var workingTable = document.getElementById("allWorkingAircrafts");
+        var nonWorkingTable = document.getElementById("allNonWorkingAircrafts");
         
-        });
+		passAircraft.forEach((aircraft) => {
+            let row = workingTable.insertRow();
+            let cell1 = row.insertCell();
+            const link = document.createElement("a")
+            link.href = "#"
+            link.addEventListener("click", function(){
+                navJobDetails(aircraft.reg_num);
+            }, false)
+            link.textContent = aircraft.reg_num // dont use innerHTML when inserting data into the DOM. It's not safe
+            cell1.appendChild(link)
+            // cell1.innerHTML = aircraft.reg_num;
+            let cell2 = row.insertCell();
+            cell2.innerHTML = aircraft.modelNum; 
+            let cell3 = row.insertCell();
+            cell3.innerHTML = aircraft.weight; 
+            let cell4 = row.insertCell();
+            cell4.innerHTML = aircraft.capacity; 
+		});
 
+        failAircrafts.forEach((aircraft) => {
+            let row = nonWorkingTable.insertRow();
+            let cell1 = row.insertCell();
+            const link = document.createElement("a")
+            link.href = "#"
+            link.addEventListener("click", navJobDetails)
+            link.textContent = aircraft.reg_num // dont use innerHTML when inserting data into the DOM. It's not safe
+            cell1.appendChild(link)
+            // cell1.innerHTML = aircraft.reg_num;
+            let cell2 = row.insertCell();
+            cell2.innerHTML = aircraft.modelNum; 
+            let cell3 = row.insertCell();
+            cell3.innerHTML = aircraft.weight; 
+            let cell4 = row.insertCell();
+            cell4.innerHTML = aircraft.capacity; 
+		});
     }
 
-    document.getElementById("jobsChart").addEventListener("click", showAllJobs);
-    document.getElementById("allAircrafts").addEventListener("click", showAllAircrafts);
-    
-    function showAllJobs(event) {
-        window.location.href = '/allJobs';
-        // console.log(event);
-    }
-
-    function showAllAircrafts(event) {
-        window.location.href = '/allAircrafts';
-        // console.log(event);
+    function navJobDetails(event) {
+        console.log(event);
     }
 });

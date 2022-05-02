@@ -54,6 +54,7 @@ router.get('/pastJobs', viewsController.pastJobs);
 
 router.get('/addUnion', viewsController.addUnion);
 router.get('/allJobs', viewsController.allJobs);
+router.get('/allAircrafts', viewsController.allAircrafts);
 
 router.get(
 	'/addAircraftModels',

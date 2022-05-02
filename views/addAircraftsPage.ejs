@@ -25,34 +25,34 @@
       <a id="logout" href="#">Logout</a>
 		</div>
 		</div> -->
-		<div>
-			<form>
-				<label for="aModelLabel">Model:</label>
+		<div class="formDiv formClass">
+			<!-- <form> -->
+				<label for="aModelLabel">Model</label>
 				<select id="aModel" name="aModel">
 					<option value="Blank"></option>
 				</select>
-				<br /><br />
 
-				<label for="aRegNum">Registration Number:</label>
-				<input type="text" id="aRegNum" name="aRegNum" /><br /><br />
 
-				<label id="aBuildLabel" for="addExpertise">Name:</label>
-				<input type="text" id="aBuild" name="aBuild" disabled /><br /><br />
+				<label for="aRegNum">Registration Number</label>
+				<input type="text" id="aRegNum" name="aRegNum" />
 
-				<label for="aCapacityLabel">Capacity:</label>
+				<label id="aBuildLabel" for="addExpertise">Name</label>
+				<input type="text" id="aBuild" name="aBuild" disabled />
+
+				<label for="aCapacityLabel">Capacity</label>
 				<input
 					type="text"
 					id="aCapacity"
 					name="aCapacity"
 					disabled
-				/><br /><br />
+				/>
 
-				<label id="aWeightLabel" for="aWeight">Weight:</label>
-				<input type="text" id="aWeight" name="aWeight" disabled /><br /><br />
+				<label id="aWeightLabel" for="aWeight">Weight</label>
+				<input type="text" id="aWeight" name="aWeight" disabled />
 
 				<button type="button" id="btnaddAircraft">Save</button>
 				<button type="button" id="btncancelAddAircraft">Cancel</button>
-			</form>
+			<!-- </form> -->
 
 			<div id="addAircraftSuccess" class="alert success hideInfo">
 				<span class="closebtn">&times;</span>

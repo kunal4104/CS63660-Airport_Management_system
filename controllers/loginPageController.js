@@ -97,13 +97,17 @@ exports.userProfile = async (req, res, next) => {
 	// }
 	// console.log(techRows);
 	// console.log(atcRows);
-
-	if (techRows.length == 0) {
-		rows[0].last_testDate = atcRows[0].last_testDate;
-	}
-
-	if (atcRows.length == 0) {
-		rows[0].expertise = techRows[0].expertise;
+	if (techRows.length == 0 && atcRows.length == 0) {
+		rows[0].last_testDate = undefined;
+		rows[0].expertise = undefined;
+	}else {
+		if (techRows.length == 0) {
+			rows[0].last_testDate = atcRows[0].last_testDate;
+		}
+	
+		if (atcRows.length == 0) {
+			rows[0].expertise = techRows[0].expertise;
+		}
 	}
 	// console.log(rows);
 	res.status(200).json({
