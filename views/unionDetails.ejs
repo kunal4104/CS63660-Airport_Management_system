@@ -19,25 +19,27 @@
 			<a class = "active" href="/union">Find Union</a>
             <a id="logout" href="#">Logout</a>
 		</div>
-		<form>
-            <br><br>
-            <label for="uname">Union Name (required): </label>
+        <div>
+            <br>
+        </div>
+		<div class="formDiv">
+            <label for="uname">Union Name (required) </label>
             <select id="uname" name="uname" required>
                 <option value="Blank"></option>
-            </select><br><br>
-            <label for="id">Union ID:</label>
-            <input type="text" id="union_id" name="uid" disabled><br><br>
+            </select>
+            <label for="id">Union ID</label>
+            <input type="text" id="union_id" name="uid" disabled>
 
-            <label for="startDate">Started On:</label>
-            <input type="text" id="startDate" name="startDate" disabled><br><br>
+            <label for="startDate">Started On</label>
+            <input type="text" id="startDate" name="startDate" disabled>
 
-            <label for="Lname">Leader Name:</label>
-            <input type="text" id="lname" name="lname" disabled><br><br>
+            <label for="Lname">Leader Name</label>
+            <input type="text" id="lname" name="lname" disabled>
 
             <button type="button" id="get_union_members">View All Members</button>
             <button type="button" id="btnUnionJoin">Join</button>
-            <button type="button" id="btnUnionLeave">Leave</button>
-    </form>
+            <button type="button" id="btnUnionLeave">Leave my Current Union</button>
+        </div>
         <div id="union_members_table" style="display:none">
             <table id="unionMembersTable">
             <tr>
