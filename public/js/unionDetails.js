@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
         console.log(unionId);
         event.preventDefault();
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', `api/v1/user/union/${unionId}`, true);
+        xhr.open('GET', `api/v1/user/union/${unionId.value}`, true);
         xhr.send();
         xhr.onload = function () {
             if (xhr.status === 200) {
