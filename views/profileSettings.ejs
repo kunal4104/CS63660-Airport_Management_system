@@ -5,9 +5,17 @@
 		<link rel="stylesheet" href="/css/style.css" />
         <script src="js/profileSettings.js"></script>
         <script src="js/unionDetailsController.js"></script>
+        <script src="js/logout.js"></script>
 	</head>
 	<body>
-        <h1>Profile Settings</h1>
+        <div class="headerDiv">
+          <a href="/index"><img class="avatar backButton" src="/images/home_button.jpg" /></a>
+    <h1 class="pageTitle">Profile Settings </h1>
+    
+  </div>
+      <div class="topnav">
+          <a id="logout" href="#">Logout</a>
+  </div>
 		<div class="formDiv formClass">
             <label for="uname">Name</label>
             <input type="text" id="uname" name="uname">
@@ -32,7 +40,7 @@
 
             <label for="salary">Union Id</label>
             <input type="text" id="uUnion" name="unionId" disabled>
-            <button class="userUnionButton" id="btnUnionJoin" type="button">Join</button>
+            <button class="userUnionButton" id="btnUnionJoinProfile" type="button">Join an union</button>
             <button class="userUnionButton" id="btnUnionLeave" type="button">Leave</button><br><br>
             <button id="btnUpdatePasswordPage" type="button">Update Password</button>
             <button type="button" id="saveProfileSettings" >Save</button>

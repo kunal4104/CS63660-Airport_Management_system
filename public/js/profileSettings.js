@@ -6,7 +6,7 @@ window.addEventListener('load', function () {
     var uphone = document.getElementById("uphone");
     var usalary = document.getElementById("usalary");
     var uUnion = document.getElementById("uUnion");
-    var btnUnionJoin = document.getElementById("btnUnionJoin");
+    var btnUnionJoinProfile = document.getElementById("btnUnionJoinProfile");
     var btnUnionLeave = document.getElementById("btnUnionLeave");
     var uExpertise = document.getElementById("uExpertise");
     var uUtd = document.getElementById("uUtd");
@@ -15,6 +15,10 @@ window.addEventListener('load', function () {
     // var saveProfileSettings = document.getElementById("");
     var btnUpdatePaasswordPageRedirect = document.getElementById("btnUpdatePasswordPage");
     document.getElementById("saveProfileSettings").addEventListener("click", saveProfileSettings);
+    btnUnionJoinProfile.addEventListener("click", gotoUnions);
+    function gotoUnions() {
+        window.location.href = "/union";
+    }
 
     function getUserProfile() {
         var xhr = new XMLHttpRequest();
