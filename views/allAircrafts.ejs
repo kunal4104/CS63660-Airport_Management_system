@@ -3,6 +3,7 @@
 	<head>
 		<title>index</title>
 		<link rel="stylesheet" href="/css/style.css" />
+		<!-- JavaScript Bundle with Popper -->
 		<script src="js/allAircrafts.js"></script>
 	</head>
 	<body>
@@ -20,34 +21,36 @@
 			<a href="/addUnion">Add Union</a>
             <a href="#">Schedule Check</a>
 		</div> -->
-        <%- include('adminNav.ejs') %>
+		<%- include('adminNav.ejs') %>
 		<div>
-            <div>
-                <h3>WORKING AIRCRAFTS</h3>
-             
-                <table class="tableClass" id="allWorkingAircrafts">
-                    <tr>
-                      <th>Registration Number</th>
-                      <th>Model Number</th>
-                      <th>Weight</th>
-                      <th>Capacity</th>
-                    </tr>
-                </table>
-            </div>
-			<br><br>
-            <div>
-                <h3>NON WORKING AIRCRAFTS</h3>
-            
-                <table class="tableClass" id="allNonWorkingAircrafts">
-                    <tr>
-                        <th>Registration Number</th>
-                        <th>Model Number</th>
-                        <th>Weight</th>
-                        <th>Capacity</th>
-                    </tr>
-                </table>
-            </div>
-            <br><br>
+			<div>
+				<h3>WORKING AIRCRAFTS</h3>
+
+				<table class="tableClass" id="allWorkingAircrafts">
+					<tr>
+						<th>Registration Number</th>
+						<th>Model Number</th>
+						<th>Model Name</th>
+						<th>Weight</th>
+						<th>Capacity</th>
+					</tr>
+				</table>
+			</div>
+			<br /><br />
+			<div>
+				<h3>NON WORKING AIRCRAFTS</h3>
+
+				<table class="tableClass" id="allNonWorkingAircrafts">
+					<tr>
+						<th>Registration Number</th>
+						<th>Model Number</th>
+						<th>Model Name</th>
+						<th>Weight</th>
+						<th>Capacity</th>
+					</tr>
+				</table>
+			</div>
+			<br /><br />
 		</div>
 	</body>
 </html>
