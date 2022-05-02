@@ -4,9 +4,9 @@ window.addEventListener('load', function () {
     pendingJobs = [];
     faaTests = [];
 
-    function getAssignedJobs() {
+    function getInProgressJobs() {
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'api/v1/user/assignedJobs', true);
+		xhr.open('GET', 'api/v1/user/inProgressJobs', true);
 		xhr.send();
 		xhr.onload = function () {
 			if (xhr.status === 200) {
@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
 		
 	}
 
-    getAssignedJobs();
+    getInProgressJobs();
 
     function getAllFaaTest() {
 		var xhr = new XMLHttpRequest();
@@ -70,6 +70,28 @@ window.addEventListener('load', function () {
             status: '2',
         }
 
+        if (postObj.jobId == "") {
+            showUpdateInfo("Please select job");
+            return;
+        }
+
+        if (postObj.dateFinished == "") {
+            showUpdateInfo("Please enter completed date");
+            return;
+        }
+        
+        var job = pendingJobs.find(x => x.job_id == postObj.jobId);
+        var test = faaTests.find(x => x.test_num == job.test_id);
+        if (postObj.score == "" || postObj.score > test.max_score) {
+            showUpdateInfo("Please enter correct score");
+            return;
+        }
+
+        if (postObj.hrsSpent == "") {
+            showUpdateInfo("Please enter hours spent");
+            return;
+        }
+
         var http = new XMLHttpRequest();
         var url = 'api/v1/user/assignedJobs';
 
@@ -93,4 +115,5 @@ window.addEventListener('load', function () {
     function showUpdateInfo(state) {
         alert(state);
     }
+
 });

@@ -20,6 +20,7 @@ router.get('/userProfile', loginPageController.userProfile);
 router.post('/saveProfile', loginPageController.saveProfile);
 router.post('/updatePassword', loginPageController.updatePassword);
 router.get('/assignedJobs', jobController.getAssignedJobs);
+router.get('/inProgressJobs', jobController.getInProgessJobs);
 router.post('/assignedJobs', jobController.postAssignedJobs);
 
 router.post('/updateUnion', loginPageController.updateUnion);
