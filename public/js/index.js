@@ -3,6 +3,8 @@
 window.addEventListener('load', function () {
 	assignedJobs = [];
 	faaTests = [];
+	flightModels = [];
+	aircarfts = [];
 	jobStatus = {'0': 'New', '1': 'In Progress'};
 	function getAssignedJobs() {
 		var xhr = new XMLHttpRequest();
@@ -12,7 +14,6 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-					console.log(rtrn.data);
 					assignedJobs = rtrn.data;
 					getAllFaaTest();
 				}
@@ -29,13 +30,45 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
-					console.log(rtrn.data);
 					faaTests = rtrn.data;
-					populate();
+					getAllAircraftModels();
 				}
 			}
 		};
 	}
+
+	function getAllAircraftModels() {
+        var xhr = new XMLHttpRequest();
+		xhr.open('GET', '/api/v1/admin/getAircraftModels', true);
+        xhr.send();
+		xhr.onload = function () {
+			if (xhr.status === 200) {
+				var rtrn = JSON.parse(xhr.responseText);
+				if (rtrn.status == 'success') {
+                    flightModels = rtrn.data;
+                    getAllAircrafts();                    
+				}
+			}
+		};
+    }
+
+	function getAllAircrafts() {
+        var xhr = new XMLHttpRequest();
+		xhr.open('GET', '/api/v1/admin/getAllAircrafts', true);
+        xhr.send();
+		xhr.onload = function () {
+			if (xhr.status === 200) {
+				var rtrn = JSON.parse(xhr.responseText);
+				if (rtrn.status == 'success') {
+                    aircarfts = rtrn.data;
+                    // saveVals(aircraftData);
+                    // fillAircraftTable()
+                    populate();
+                    
+				}
+			}
+		};
+    }
 
 	getAssignedJobs();
 
@@ -43,6 +76,8 @@ window.addEventListener('load', function () {
 		var table = document.getElementById("assignedJobsTable");
 		assignedJobs.forEach((job) => {
 			var test = faaTests.find(x => x.test_num == job.test_id);
+			var flight = aircarfts.find(x => x.registration_no == job.flight_num);
+			var model = flightModels.find(x => x.model_num == flight.model);
 			var row = table.insertRow();
 			var cell1 = row.insertCell();
 			cell1.innerHTML = job.job_id;
@@ -55,7 +90,18 @@ window.addEventListener('load', function () {
 			var cell4 = row.insertCell();
 			cell4.innerHTML = test.name; 
 			var cell5 = row.insertCell();
-			cell5.append(selectTagStatus(job.job_id, jobStatus[job.status])); 
+			cell5.append(selectTagStatus(job.job_id, jobStatus[job.status]));
+			var row1 = table.insertRow();
+			row1.style.display = 'none';
+			var cell = row1.insertCell();
+			cell.innerHTML = "<p> <b>Aircraft Model:  </b> " + model.model_num +"<br\>" + "<b>Weight:  </b>" + model.weight + "<br\>" + "<b>Capacity:  </b>" + model.capacity + "<\p>";
+			row.addEventListener('click', function() {
+				if (row1.style.display=='none') {
+					row1.style.display = '';
+				} else {
+					row1.style.display = 'none';
+				}
+			})
 		});
 	}
 
