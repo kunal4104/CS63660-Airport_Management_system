@@ -4,7 +4,6 @@ exports.getAirplanes = async (req, res, next) => {
 	const rows = await factory.getAll('aircrafts');
 	res.status(200).json({
 		status: 'success',
-		token: 'token',
 		data: rows,
 	});
 };
