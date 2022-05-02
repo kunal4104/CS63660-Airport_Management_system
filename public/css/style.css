@@ -41,8 +41,26 @@ a {
 	border-radius: 50%;
   }
 
+  .backButton {
+	margin-top: 32px;
+  }
+
+  .pageTitle {
+	margin-left: 489px;
+  }
+
+  .profileImg {
+	  margin-left: 520px;
+  }
+
+  .adminHome {
+	  margin-left: 300px;
+	  margin-top: 100px;
+  }
+
   .headerDiv {
 	  width: 100%;
+	  display: flex;
   }
 
   .alert {
@@ -76,6 +94,19 @@ a {
   .hideInfo {
 	  display: none;
   }
+
+  .formClass {
+	  margin-top: 20px;
+	  margin-left: 100px;
+  }
+
+	div.formDiv {
+		display:grid;
+		grid-template-columns: max-content max-content;
+		grid-gap:10px;
+	}
+	div.formDiv label       { text-align:right; }
+	div.formDiv label:after { content: ":"; }
 
   .showInfo {
 	display: block;
