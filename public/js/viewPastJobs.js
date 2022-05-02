@@ -51,9 +51,17 @@ window.addEventListener('load', function () {
 			dString = ('0' + (d.getMonth()+1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2)  + '/' + d.getFullYear();
 			cell3.innerHTML = dString; 
 			var cell4 = row.insertCell();
-			cell4.innerHTML = test.name; 
+			cell4.innerHTML = test.name;
 			var cell5 = row.insertCell();
-			cell5.innerHTML = jobStatus[job.status]; 
+			cell5.innerHTML = job.score + " / " + test.max_score;
+			var cell6 = row.insertCell();
+			cell6.innerHTML = job.hours_spent;
+			var cell7 = row.insertCell();
+			cell7.innerHTML = jobStatus[job.status]; 
+			var cell8 = row.insertCell();
+			d = new Date(job.date_finished);
+			dString = ('0' + (d.getMonth()+1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2)  + '/' + d.getFullYear();
+			cell8.innerHTML = dString; 
 		});
 	}
 });

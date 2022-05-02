@@ -1,17 +1,46 @@
 const factory = require('./factoryController');
 
 exports.getAssignedJobs = async (req, res, next) => {
-	console.log(req.user);
-    const rows = await factory.getByAttribute(
+	user = req.user;
+    const row1 = await factory.getByAttribute(
 		'jobs',
-		{'technician_id':'1112223334'}
+		{
+			'technician_id': user.SSN,
+			'status': 0,
+		}
 	);
 
-	non_completed_rows = rows.filter(x => x.status != 2);
+	const row2 = await factory.getByAttribute(
+		'jobs',
+		{
+			'technician_id': user.SSN,
+			'status': 1,
+		}
+	);
+
+	rows = row1.concat(row2);
+	// non_completed_rows = rows.filter(x => x.status != 2);
     res.status(200).json({
 		status: 'success',
 		token: 'token',
-		data: non_completed_rows,
+		data: rows,
+	});
+};
+
+exports.getInProgessJobs = async (req, res, next) => {
+	user = req.user;
+	const rows = await factory.getByAttribute(
+		'jobs',
+		{
+			'technician_id': user.SSN,
+			'status': 1,
+		}
+	);
+
+    res.status(200).json({
+		status: 'success',
+		token: 'token',
+		data: rows,
 	});
 };
 
@@ -45,11 +74,12 @@ exports.postAssignedJobs = async (req, res, next) => {
 };
 
 exports.getPastJobs = async (req, res, next) => {
+	user = req.user;
     const rows = await factory.getByAttribute(
 		'jobs',
-		{'technician_id':'1112223334', 'status':'2'}
+		{'technician_id': user.SSN, 'status':'2'}
 	);
-
+	console.log(rows);
     res.status(200).json({
 		status: 'success',
 		token: 'token',

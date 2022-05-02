@@ -4,9 +4,9 @@ window.addEventListener('load', function () {
     pendingJobs = [];
     faaTests = [];
 
-    function getAssignedJobs() {
+    function getInProgressJobs() {
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'api/v1/user/assignedJobs', true);
+		xhr.open('GET', 'api/v1/user/inProgressJobs', true);
 		xhr.send();
 		xhr.onload = function () {
 			if (xhr.status === 200) {
@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
 		
 	}
 
-    getAssignedJobs();
+    getInProgressJobs();
 
     function getAllFaaTest() {
 		var xhr = new XMLHttpRequest();
