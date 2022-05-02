@@ -153,7 +153,7 @@ window.addEventListener('load', function () {
         aircraftData.forEach((airCraft) => {
             aircraftTest[airCraft.registration_no] = [];
             jobsData.forEach((job) => {
-                if (job.status == 2 && job.flight_num == airCraft.registration_no) {
+                if (job.flight_num == airCraft.registration_no) {
                     aircraftTest[airCraft.registration_no].push(job);
                 }
             });
@@ -220,9 +220,15 @@ window.addEventListener('load', function () {
     }
 
     document.getElementById("jobsChart").addEventListener("click", showAllJobs);
+    document.getElementById("allAircrafts").addEventListener("click", showAllAircrafts);
     
     function showAllJobs(event) {
         window.location.href = '/allJobs';
+        // console.log(event);
+    }
+
+    function showAllAircrafts(event) {
+        window.location.href = '/allAircrafts';
         // console.log(event);
     }
 });

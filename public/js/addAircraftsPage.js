@@ -1,5 +1,6 @@
 window.addEventListener('load', function () {
-    var modelDetails = {}
+    var modelDetails = {};
+    var modelDetailMap = {};
     var aModel = document.getElementById("aModel");
     var aRegNum = document.getElementById("aRegNum");
     var aCapacity = document.getElementById("aCapacity");
@@ -26,6 +27,8 @@ window.addEventListener('load', function () {
 			if (xhr.status === 200) {
 				var rtrn = JSON.parse(xhr.responseText);
 				if (rtrn.status == 'success') {
+                    modelDetails = rtrn.data;
+                    createModelMap(modelDetails);
                     fillValues(rtrn.data);
 				}
 			}
@@ -34,10 +37,22 @@ window.addEventListener('load', function () {
     }
     getModels();
 
+    function createModelMap(modelData) {
+        for (let i = 0; i < modelData.length; i++) {
+
+            modelDetailMap[modelData[i].model_num] = {
+                model_num: modelData[i].model_num,
+                name: modelData[i].name,
+                weight: modelData[i].weight,
+                capacity: modelData[i].capacity
+            }
+        }
+    }
+
     function fillValues(modelData) {
         for (let i = 0; i < modelData.length; i++) {
             modelName = modelData[i].model_num;
-            modelDetails.modelName = modelData[i];
+            // modelDetails.modelName = modelData[i];
             aModel.add(new Option(modelData[i].model_num, modelData[i].model_num));
         }
     }
@@ -50,7 +65,8 @@ window.addEventListener('load', function () {
             aWeight.value = "";
             aRegNum.value = "";
         }else {
-            oModelData = modelDetails.modelName;
+            oModelData = modelDetailMap[modelName]
+            // oModelData = modelDetails.modelName;
             aRegNum.value = "";
             aCapacity.value = oModelData.capacity;
             aBuild.value = oModelData.name;

@@ -58,3 +58,7 @@ exports.updatePassword = (req, res, next) => {
 exports.scheduleTest = (req, res, next) => {
 	res.status(200).render('scheduleTest');
 };
+
+exports.allAircrafts = (req, res, next) => {
+	res.status(200).render('allAircrafts');
+};
