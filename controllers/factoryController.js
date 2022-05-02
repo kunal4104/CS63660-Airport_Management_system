@@ -160,3 +160,16 @@ exports.deleteFromTable = async (table, attributes, value) => {
 		return { err: 'Error', data: err };
 	}
 };
+
+
+exports.getJoinedTable = async (table1, table2, attributes1, attributes2) => {
+	let query = `SELECT * FROM ${table1} INNER JOIN ${table2} ON ${table1}.${attributes1} = ${table2}.${attributes2}`;
+
+	console.log(query);
+	try {
+		const [ret, fields] = await promisePool.query(query);
+		return ret;
+	} catch (err) {
+		return { err: 'Error', data: err };
+	}
+};
