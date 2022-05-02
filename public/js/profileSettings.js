@@ -50,10 +50,10 @@ window.addEventListener('load', function () {
 
         if (profileData.union_id && profileData.union_id > 0) {
             btnUnionLeave.style.visibility = "visible";
-            btnUnionJoin.style.visibility = "hidden";
+            btnUnionJoinProfile.style.visibility = "hidden";
         } else {
             btnUnionLeave.style.visibility = "hidden";
-            btnUnionJoin.style.visibility = "visible";
+            btnUnionJoinProfile.style.visibility = "visible";
         }
 
         if (profileData.expertise) {
@@ -123,8 +123,8 @@ window.addEventListener('load', function () {
     }
 
     function showUpdateInfo(state) {
-        var successDiv = document.getElementById("uSuccessDialog");
-        var uErrorDialog = document.getElementById("uErrorDialog");
+        var successDiv = document.getElementById("updateUnionSuccess");
+        var uErrorDialog = document.getElementById("updateUnionError");
         if (state === "success") {
             uErrorDialog.classList.add("hideInfo")
             successDiv.classList.add("showInfo")

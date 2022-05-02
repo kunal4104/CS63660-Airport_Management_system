@@ -1,10 +1,10 @@
 window.addEventListener('load', function () {
     var http = new XMLHttpRequest();
     var btnUnionLeave = document.getElementById("btnUnionLeave");
-    var btnUnionJoin = document.getElementById("btnUnionJoin");
+    var btnUnionJoin = document.getElementById("btnUnionJoinProfile");
     var updateUnionSuccess = document.getElementById("updateUnionSuccess");
     var updateUnionError = document.getElementById("updateUnionError");
-
+    console.log(btnUnionJoin)
     btnUnionLeave.addEventListener('click', unionLeave);
     btnUnionJoin.addEventListener('click', unionJoin);
     function unionLeave(event) {
