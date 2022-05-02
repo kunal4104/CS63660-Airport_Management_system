@@ -92,12 +92,17 @@ a {
   }
 
   .hideInfo {
-	  display: none;
+	  visibility: hidden;
   }
 
   .formClass {
 	  margin-top: 20px;
 	  margin-left: 100px;
+  }
+
+  .formButton {
+	margin-top: 20px;
+	margin-left: 200px;
   }
 
 	div.formDiv {
@@ -109,7 +114,7 @@ a {
 	div.formDiv label:after { content: ":"; }
 
   .showInfo {
-	display: block;
+	visibility: visible;
 	}
 
 	.tableClass {
