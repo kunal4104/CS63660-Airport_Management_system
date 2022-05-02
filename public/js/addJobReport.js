@@ -3,6 +3,8 @@ window.addEventListener('load', function () {
     document.getElementById("submitReport").addEventListener("click", submitReport);
     pendingJobs = [];
     faaTests = [];
+    var addJobReportSuccess = document.getElementById("addJobReportSuccess");
+    var addJobReportError = document.getElementById("addJobReportError");
 
     function getInProgressJobs() {
 		var xhr = new XMLHttpRequest();
@@ -71,24 +73,24 @@ window.addEventListener('load', function () {
         }
 
         if (postObj.jobId == "") {
-            showUpdateInfo("Please select job");
+            showAlertError("Please select job");
             return;
         }
 
         if (postObj.dateFinished == "") {
-            showUpdateInfo("Please enter completed date");
+            showAlertError("Please enter completed date");
             return;
         }
         
         var job = pendingJobs.find(x => x.job_id == postObj.jobId);
         var test = faaTests.find(x => x.test_num == job.test_id);
         if (postObj.score == "" || postObj.score > test.max_score) {
-            showUpdateInfo("Please enter correct score");
+            showAlertError("Please enter correct score");
             return;
         }
 
         if (postObj.hrsSpent == "") {
-            showUpdateInfo("Please enter hours spent");
+            showAlertError("Please enter hours spent");
             return;
         }
 
@@ -104,16 +106,38 @@ window.addEventListener('load', function () {
         urlEncodedData = urlEncodedDataPairs.join("&");
         http.onreadystatechange = function() {//Call a function when the state changes.
             if(http.readyState == 4 && http.status == 200) {
-                showUpdateInfo("Report submitted successfully");
+                showUpdateInfo("success");
             }else if (http.readyState == 4 && http.status != 200){
-                showUpdateInfo("Resport submission failed");
+                showUpdateInfo("error");
             }
         }
         http.send(urlEncodedData);
     }
 
-    function showUpdateInfo(state) {
+    function showAlertError(state) {
         alert(state);
+    }
+
+    function showUpdateInfo(state) {
+        if (state === "success") {
+            addJobReportError.classList.add("hideInfo")
+            addJobReportSuccess.classList.add("showInfo")
+        }else {
+            addJobReportSuccess.classList.add("hideInfo")
+            addJobReportError.classList.add("showInfo")
+        }
+
+
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+                var div = this.parentElement;
+                // div.style.opacity = "0";
+                setTimeout(function(){ div.classList.remove("showInfo"); }, 600);
+            }
+        }
     }
 
 });

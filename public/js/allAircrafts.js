@@ -187,8 +187,8 @@ window.addEventListener('load', function () {
 		passAircraft.forEach((aircraft) => {
 			let row = workingTable.insertRow();
 			let cell1 = row.insertCell();
-			// const link = document.createElement('a');
-			// link.href = '#';
+			const link = document.createElement('a');
+			link.href = '/jobs/' + aircraft.reg_num;
 			// link.addEventListener(
 			// 	'click',
 			// 	function () {
@@ -196,10 +196,10 @@ window.addEventListener('load', function () {
 			// 	},
 			// 	false
 			// );
-			// link.textContent = aircraft.reg_num; // dont use innerHTML when inserting data into the DOM. It's not safe
-			// cell1.appendChild(link);
+			link.textContent = aircraft.reg_num; // dont use innerHTML when inserting data into the DOM. It's not safe
+			cell1.appendChild(link);
 
-			cell1.textContent = aircraft.reg_num;
+			// cell1.textContent = aircraft.reg_num;
 			let cell2 = row.insertCell();
 			cell2.innerHTML = aircraft.modelNum;
 			// cell1.innerHTML = aircraft.reg_num;
@@ -215,10 +215,11 @@ window.addEventListener('load', function () {
 			let row = nonWorkingTable.insertRow();
 			let cell1 = row.insertCell();
 			const link = document.createElement('a');
-			// link.href = '#';
+			link.href = '/jobs/' + aircraft.reg_num;
 			// link.addEventListener('click', navJobDetails);
-			// link.textContent = aircraft.reg_num; // dont use innerHTML when inserting data into the DOM. It's not safe
-			cell1.textContent = aircraft.reg_num;
+			link.textContent = aircraft.reg_num; // dont use innerHTML when inserting data into the DOM. It's not safe
+			cell1.append(link);
+			// cell1.textContent = aircraft.reg_num;
 			// cell1.innerHTML = aircraft.reg_num;
 			let cell2 = row.insertCell();
 			cell2.innerHTML = aircraft.modelNum;

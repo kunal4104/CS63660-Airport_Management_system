@@ -1,3 +1,5 @@
+const jobController = require('../controllers/jobController');
+
 exports.loginPage = (req, res, next) => {
 	res.status(200).render('loginPage');
 };
@@ -11,7 +13,6 @@ exports.adminPage = (req, res, next) => {
 };
 
 exports.unionPage = (req, res, next) => {
-	console.log('unionPage');
 	res.status(200).render('unionDetails');
 };
 
@@ -50,7 +51,7 @@ exports.addUnion = (req, res, next) => {
 };
 exports.allJobs = (req, res, next) => {
 	res.status(200).render('allJobs');
-};	
+};
 exports.updatePassword = (req, res, next) => {
 	res.status(200).render('updatePassword');
 };
@@ -61,4 +62,23 @@ exports.scheduleTest = (req, res, next) => {
 
 exports.allAircrafts = (req, res, next) => {
 	res.status(200).render('allAircrafts');
+};
+
+exports.aircraftJobs = async (req, res, next) => {
+	console.log(req.params.id);
+	const rows = await jobController.staticGetAirplaneJobs(req.params.id);
+	for (var i = 0; i < rows.length; i++) {
+		if (rows[i].date_assigned)
+			rows[i].date_assigned = rows[i].date_assigned.toLocaleDateString();
+		if (rows[i].date_finished)
+			rows[i].date_finished = rows[i].date_finished.toLocaleDateString();
+		if (rows[i].status == 0) rows[i].status = 'New';
+		else if (rows[i].status == 1) rows[i].status = 'In Progress';
+		else if (rows[i].status == 2) rows[i].status = 'completed ';
+	}
+
+	console.log(rows);
+	res
+		.status(200)
+		.render('aircraftJobs', { rows: rows, flight_id: req.params.id });
 };

@@ -51,7 +51,6 @@ router.get(
 );
 router.get('/pastJobs', viewsController.pastJobs);
 
-
 router.get('/addUnion', viewsController.addUnion);
 router.get('/allJobs', viewsController.allJobs);
 router.get('/allAircrafts', viewsController.allAircrafts);
@@ -69,5 +68,9 @@ router.get(
 router
 	.route('/scheduleTest')
 	.get(authController.restrictTo('admin'), viewsController.scheduleTest);
+
+router
+	.route('/jobs/:id')
+	.get(authController.restrictTo('admin'), viewsController.aircraftJobs);
 
 module.exports = router;
